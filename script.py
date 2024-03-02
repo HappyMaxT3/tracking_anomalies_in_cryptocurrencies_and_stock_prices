@@ -37,14 +37,24 @@ plt.plot(model.index, model, color="green", linestyle=":", label='Модель �
 filtered_lower_bound = (residuals < lower_bound) & (correlation < 0)
 filtered_upper_bound = (residuals > upper_bound) & (correlation < 0)
 
-plt.scatter(stock_data[filtered_lower_bound].index, stock_data[filtered_lower_bound]['Close'],
-            color='red', label='Аномалии, перешедшие нижнюю границу')
-plt.scatter(stock_data[filtered_upper_bound].index, stock_data[filtered_upper_bound]['Close'],
-            color='blue', label='Аномалии, перешедшие верхнюю границу')
-
 plt.xlabel('Дата')
 plt.ylabel('Цена')
 plt.title('Вычисление аномалий в цене акции')
 plt.legend()
 
+
+anomaly_counter = 1
+for i in range(len(stock_data.index)):
+    if filtered_lower_bound.iloc[i] or filtered_upper_bound.iloc[i]:
+        plt.scatter(stock_data.index[i], stock_data['Close'].iloc[i], color='red' if filtered_lower_bound.iloc[i] else 'blue', label='Аномалии, перешедшие нижнюю границу' if filtered_upper_bound.iloc[i] else 'Аномалии, перешедшие верхнюю границу')
+        plt.text(stock_data.index[i], stock_data['Close'].iloc[i], anomaly_counter, fontsize=12, ha='right', va='bottom')
+        anomaly_counter += 1
+anomalies = stock_data[(filtered_lower_bound | filtered_upper_bound)]
+anomalies['Difference'] = anomalies['Close'] - model[anomalies.index]
+
+print("Список аномалий:")
+i = 1
+for idx, anomaly in anomalies.iterrows():
+    print(f"{i}) Дата: {idx}, Разница: {round(anomaly['Difference'], 3)}")
+    i += 1
 plt.show()
