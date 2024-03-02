@@ -1,60 +1,55 @@
 import matplotlib.pyplot as plt
 import yfinance as yf
 from datetime import datetime, timedelta
+import statsmodels.api as sm
 
 # Определение диапазона времени для исследования
-start_date = (datetime.now() - timedelta(weeks=3)).strftime('%Y-%m-%d')
-end_date = datetime.now().strftime('%Y-%m-%d')  # Установка в качестве даты конца сегоднешей
-# Запрос данных по акции из API на заданном отрезке времени с интервалом 15 минут
-symbol = 'AAPL'  # Тикер акции
-stock_data = yf.download(symbol, start=start_date, end=end_date, interval="15m")
+start_date = (datetime.now() - timedelta(weeks=1)).strftime('%Y-%m-%d')
+end_date = datetime.now().strftime('%Y-%m-%d')
 
-# Запрос данных по портфелю акций на заданном отрезке времени с интервалом 15 минут
-market_index_symbol = '^GSPC'  # Тикер портфеля
-market_data = yf.download(market_index_symbol, start=start_date, end=end_date, interval="15m")
+# Запрос данных по акции и портфелю из API на заданном отрезке времени
+symbol = 'AAPL'
+market_index_symbol = '^GSPC'
+stock_data = yf.download(symbol, start=start_date, end=end_date, interval='30m')
+market_data = yf.download(market_index_symbol, start=start_date, end=end_date, interval='30m')
 
-# Вычисление корреляции
-correlation = stock_data['Close'].corr(market_data['Close'])
+# Выравнивание наборов данных
+stock_data, market_data = stock_data.align(market_data, join='inner', axis=0)
 
-# Создание модели и получение остатков
-model = stock_data['Close'].rolling(window=3).mean()
-residuals = stock_data['Close'] - model
+# Построение модели регрессии
+X = sm.add_constant(market_data['Close'])
+y = stock_data['Close']
+model = sm.OLS(y, X).fit()
 
-# Расчет среднего и общего отклонения остатков
-mean_residuals = residuals.mean()
-std_residuals = residuals.std()
+# Расчет остатков и плавающего стандартного отклонения остатков
+residuals = model.resid
+rolling_std_residuals = residuals.rolling(window=20, min_periods=1).std()
 
-# Определение нижней и верхней границ аномальных значений
-lower_bound = mean_residuals - 2 * std_residuals
-upper_bound = mean_residuals + 2 * std_residuals
+# Определение границ аномалий с использованием стандартного отклонения
+lower_bound_multiplier = 1.5
+upper_bound_multiplier = 1.5
+lower_bound = model.fittedvalues - lower_bound_multiplier * rolling_std_residuals
+upper_bound = model.fittedvalues + upper_bound_multiplier * rolling_std_residuals
 
-# Создание графика
+# Построение графиков текущей и предполагаемой цены
 plt.figure(figsize=(15, 6))
 plt.plot(stock_data.index, stock_data['Close'], color="green", label='Реальная цена акции')
-plt.plot(model.index, model, color="green", linestyle=":", label='Модель цены акции')
+plt.plot(stock_data.index, model.fittedvalues, color="green", linestyle=":", label='Модель цены акции')
 
-# Фильтрация аномалий на основе корреляции
-filtered_lower_bound = (residuals < lower_bound) & (correlation < 0)
-filtered_upper_bound = (residuals > upper_bound) & (correlation < 0)
+# Нахождение аномалий
+below_lower_bound = stock_data['Close'] < lower_bound
+above_upper_bound = stock_data['Close'] > upper_bound
+
+# Построение аномалий под нижней границей
+plt.scatter(stock_data.index[below_lower_bound], stock_data['Close'][below_lower_bound], color='red', label='Аномалии, перешедшие нижнюю границу')
+
+# Построение аномалий над верзней границей
+plt.scatter(stock_data.index[above_upper_bound], stock_data['Close'][above_upper_bound], color='blue', label='Аномалии, перешедшие верхнюю границу')
 
 plt.xlabel('Дата')
 plt.ylabel('Цена')
 plt.title('Вычисление аномалий в цене акции')
 plt.legend()
 
-
-anomaly_counter = 1
-for i in range(len(stock_data.index)):
-    if filtered_lower_bound.iloc[i] or filtered_upper_bound.iloc[i]:
-        plt.scatter(stock_data.index[i], stock_data['Close'].iloc[i], color='red' if filtered_lower_bound.iloc[i] else 'blue', label='Аномалии, перешедшие нижнюю границу' if filtered_upper_bound.iloc[i] else 'Аномалии, перешедшие верхнюю границу')
-        plt.text(stock_data.index[i], stock_data['Close'].iloc[i], anomaly_counter, fontsize=12, ha='right', va='bottom')
-        anomaly_counter += 1
-anomalies = stock_data[(filtered_lower_bound | filtered_upper_bound)]
-anomalies['Difference'] = anomalies['Close'] - model[anomalies.index]
-
-print("Список аномалий:")
-i = 1
-for idx, anomaly in anomalies.iterrows():
-    print(f"{i}) Дата: {idx}, Разница: {round(anomaly['Difference'], 3)}")
-    i += 1
+# Отображение графика
 plt.show()
