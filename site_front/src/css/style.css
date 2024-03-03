@@ -65,3 +65,86 @@
 
     z-index: 1;
 }
+
+.footer{
+    background-color: rgba(100, 111, 132, 1);
+    width: 100%;
+    height: 50vmin;
+
+    margin-top: 4%;
+    min-width: 1700px;
+
+    z-index: 2;
+}
+
+.btc_logo{
+    margin-left: 10%;
+    margin-top: min(-60%, -1300px);
+    margin-top: max(-60%, -1550px);
+
+    z-index: 1;
+}
+
+.hse_icon{
+    margin-left: 81%;
+    margin-top: max(-13%, -1600px);
+
+    z-index: 1;
+}
+
+.text_page1{
+    width: 1500px;
+
+    margin-left: 200px;
+    margin-top: -40px;
+    
+    text-align: left;
+    color: rgba(255, 255, 255, 1);
+    font-family:  'Krub ExtraLight', sans-serif;
+}
+
+.text_page2-3{
+    text-align: center;
+
+    color: rgba(255, 255, 255, 1);
+    font-family:  'Krub ExtraLight', sans-serif;
+}
+
+.guide_boxes{
+    width: 310px;
+    height: 630px;
+
+    color: rgba(255, 255, 255, 1);
+    font-size: x-large;
+    font-family:  'Krub ExtraLight', sans-serif;
+
+    border: 2px solid rgba(255, 255, 255, 1);
+    border-radius: 40px;
+    padding: 20px;
+    display: inline;
+    background-color: rgba(33, 67, 152, 1);
+}
+
+.feild1{
+    border: none;
+    border-radius: 20px;
+    background-color: rgba(41, 53, 168, 1);
+    color: rgba(255, 255, 255, 1);
+    font-size: x-large;
+    padding: 5px;
+
+    width: 600px;
+    height: 100px;
+}
+
+.feild2-3{
+    border: none;
+    border-radius: 20px;
+    background-color: rgba(41, 53, 168, 1);
+    color: rgba(255, 255, 255, 1);
+    font-size: x-large;
+    padding: 5px;
+
+    width: 20%;
+    height: 100px;
+}
