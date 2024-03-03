@@ -148,3 +148,23 @@
     width: 20%;
     height: 100px;
 }
+
+.grafic{
+    width: 60%;
+    height: 700px;
+    min-width: 1000px;
+
+    border: 3px solid rgba(97, 109, 218, 1);
+    background-color: rgba(13, 18, 69, 1);
+    border-radius: 15px;
+}
+
+.analysis{
+    width: 21%;
+    height: 700px;
+    min-width: 400px;
+
+    border: 3px solid rgba(97, 109, 218, 1);
+    background-color: rgba(13, 18, 69, 1);
+    border-radius: 15px;
+}
