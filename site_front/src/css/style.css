@@ -69,11 +69,11 @@
 .footer{
     background-color: rgba(100, 111, 132, 1);
     width: 100%;
-    height: 50vmin;
+    height: 60vmin;
 
     margin-top: 4%;
     min-width: 1700px;
-    min-height: 550px;
+    min-height: 610px;
 
     z-index: 2;
 }
@@ -97,7 +97,7 @@
     width: 1500px;
 
     margin-left: 200px;
-    margin-top: -50px;
+    margin-top: 8%;
     
     text-align: left;
     color: rgba(255, 255, 255, 1);
@@ -114,7 +114,8 @@
 
 .guide_container{
 
-    margin-left: min(7%, 150px);
+    margin-top: 5%;
+    margin-left: min(10%, 500px);
 
     display: flex;
     flex-direction: row;
@@ -123,12 +124,11 @@
 
 }
 
-
 .guide_boxes{
-    width: 14%;
+    width: 15%;
     height: 40%;
-    min-height: 360px;
-    min-width: 250px;
+    min-height: 500px;
+    min-width: 300px;
 
     color: rgba(255, 255, 255, 1);
     font-size: xx-large;
@@ -145,6 +145,8 @@
 }
 
 .feild_container{
+
+    margin-top: 2%;
 
     display: flex;
     flex-direction: row;
@@ -180,7 +182,7 @@
 .grafic{
     width: 60%;
     height: 700px;
-    min-width: 800px;
+    min-width: 750px;
 
     border: 3px solid rgba(97, 109, 218, 1);
     background-color: rgba(13, 18, 69, 1);
@@ -190,7 +192,7 @@
 .analysis{
     width: 21%;
     height: 700px;
-    min-width: 350px;
+    min-width: 330px;
 
     border: 3px solid rgba(97, 109, 218, 1);
     background-color: rgba(13, 18, 69, 1);
