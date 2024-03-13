@@ -25,7 +25,7 @@
 
     margin-top: -1%;
     min-width: 1700px;
-    /* min-height: 1100px; */
+    min-height: 1100px;
 
     z-index: 0;
 }
@@ -37,7 +37,7 @@
     height: 120vmin;
 
     margin-top: 18%;
-    min-width: 1700px;
+    max-height: 1500px;
 
     z-index: 0;
 }
@@ -73,6 +73,7 @@
 
     margin-top: 4%;
     min-width: 1700px;
+    min-height: 550px;
 
     z-index: 2;
 }
@@ -105,6 +106,7 @@
 
 .text_page2-4{
     text-align: center;
+    margin-left: max(0%, 100px);
 
     color: rgba(255, 255, 255, 1);
     font-family:  'Krub ExtraLight', sans-serif;
@@ -112,12 +114,15 @@
 
 .guide_container{
 
+    margin-left: min(7%, 150px);
+
     display: flex;
     flex-direction: row;
-    width: 90vw;
+    width: 90%;
     justify-content: space-around;
 
 }
+
 
 .guide_boxes{
     width: 14%;
@@ -140,9 +145,11 @@
 }
 
 .feild_container{
+
     display: flex;
     flex-direction: row;
-    width: 90vw;
+    width: 90%;
+    min-width: 700px;
     justify-content: space-around;
 }
 
@@ -183,7 +190,7 @@
 .analysis{
     width: 21%;
     height: 700px;
-    min-width: 400px;
+    min-width: 350px;
 
     border: 3px solid rgba(97, 109, 218, 1);
     background-color: rgba(13, 18, 69, 1);
@@ -193,7 +200,7 @@
 .footer_text{
 
     color: rgba(255, 255, 255, 1);
-    font-size: x-large;
+    font-size: xx-large;
     font-family:  'Krub ExtraLight', sans-serif;
     padding: 20px;
 }
