@@ -21,11 +21,11 @@
 .back_second{
     background-color: rgba(19, 51, 134, 1);
     width: 100%;
-    height: 120vmin;
+    height: 150vmin;
 
     margin-top: -1%;
     min-width: 1700px;
-    min-height: 1100px;
+    /* min-height: 1100px; */
 
     z-index: 0;
 }
@@ -36,7 +36,7 @@
     width: 100%;
     height: 120vmin;
 
-    margin-top: -1%;
+    margin-top: 18%;
     min-width: 1700px;
 
     z-index: 0;
@@ -47,8 +47,8 @@
     background-color: rgba(34, 42, 118, 1);
 
     width: 6%;
-    height: 130vmin;
-    min-height: 1100px;
+    height: 150vmin;
+    min-height: 1400px;
 
     margin-left: -1%;
 
@@ -79,15 +79,15 @@
 
 .btc_logo{
     margin-left: 10%;
-    margin-top: min(-60%, -1300px);
-    margin-top: max(-60%, -1550px);
+    margin-top: min(-50%, -1300px);
+    margin-top: max(-70%, -1550px);
 
     z-index: 1;
 }
 
 .hse_icon{
     margin-left: 81%;
-    margin-top: max(-13%, -1600px);
+    margin-top: max(-13%, -1300px);
 
     z-index: 1;
 }
@@ -96,33 +96,54 @@
     width: 1500px;
 
     margin-left: 200px;
-    margin-top: -40px;
+    margin-top: -50px;
     
     text-align: left;
     color: rgba(255, 255, 255, 1);
     font-family:  'Krub ExtraLight', sans-serif;
 }
 
-.text_page2-3{
+.text_page2-4{
     text-align: center;
 
     color: rgba(255, 255, 255, 1);
     font-family:  'Krub ExtraLight', sans-serif;
 }
 
+.guide_container{
+
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    justify-content: space-around;
+
+}
+
 .guide_boxes{
-    width: 310px;
-    height: 630px;
+    width: 14%;
+    height: 40%;
+    min-height: 360px;
+    min-width: 250px;
 
     color: rgba(255, 255, 255, 1);
-    font-size: x-large;
+    font-size: xx-large;
     font-family:  'Krub ExtraLight', sans-serif;
 
     border: 2px solid rgba(255, 255, 255, 1);
     border-radius: 40px;
-    padding: 20px;
-    display: inline;
+    padding: 15px;
     background-color: rgba(33, 67, 152, 1);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.feild_container{
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    justify-content: space-around;
 }
 
 .feild1{
@@ -131,10 +152,10 @@
     background-color: rgba(41, 53, 168, 1);
     color: rgba(255, 255, 255, 1);
     font-size: x-large;
-    padding: 5px;
+    padding: 3px;
 
-    width: 600px;
-    height: 100px;
+    width: 40%;
+    height: 70px;
 }
 
 .feild2-3{
@@ -143,16 +164,16 @@
     background-color: rgba(41, 53, 168, 1);
     color: rgba(255, 255, 255, 1);
     font-size: x-large;
-    padding: 5px;
+    padding: 3px;
 
     width: 20%;
-    height: 100px;
+    height: 70px;
 }
 
 .grafic{
     width: 60%;
     height: 700px;
-    min-width: 1000px;
+    min-width: 800px;
 
     border: 3px solid rgba(97, 109, 218, 1);
     background-color: rgba(13, 18, 69, 1);
@@ -167,4 +188,12 @@
     border: 3px solid rgba(97, 109, 218, 1);
     background-color: rgba(13, 18, 69, 1);
     border-radius: 15px;
+}
+
+.footer_text{
+
+    color: rgba(255, 255, 255, 1);
+    font-size: x-large;
+    font-family:  'Krub ExtraLight', sans-serif;
+    padding: 20px;
 }
