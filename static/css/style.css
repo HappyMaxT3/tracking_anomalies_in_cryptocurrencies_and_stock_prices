@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Krub ExtraLight';
-    src: url('Krub-ExtraLight.woff');
+    src: url('../fonts/Krub-ExtraLight.woff');
     }
 
 
@@ -110,7 +110,7 @@
     margin-left: max(0%, 100px);
 
     color: rgba(255, 255, 255, 1);
-    font-family:  'Krub ExtraLight', sans-serif;
+    font-family: 'Krub ExtraLight', sans-serif;
 }
 
 .guide_container{
@@ -133,7 +133,7 @@
 
     color: rgba(255, 255, 255, 1);
     font-size: xx-large;
-    font-family:  'Krub ExtraLight', sans-serif;
+    font-family: 'Krub ExtraLight', sans-serif;
 
     border: 2px solid rgba(255, 255, 255, 1);
     border-radius: 40px;
@@ -184,6 +184,7 @@
     width: 60%;
     height: 700px;
     min-width: 750px;
+    margin: 0 auto;
 
     border: 3px solid rgba(97, 109, 218, 1);
     background-color: rgba(13, 18, 69, 1);
@@ -204,6 +205,6 @@
 
     color: rgba(255, 255, 255, 1);
     font-size: x-large;
-    font-family:  'Krub ExtraLight', sans-serif;
+    font-family: 'Krub ExtraLight', sans-serif;
     padding: 20px;
 }
