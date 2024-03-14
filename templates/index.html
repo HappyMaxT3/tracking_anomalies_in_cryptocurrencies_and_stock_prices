@@ -60,11 +60,17 @@
             <div class="text_page2-4" style="margin-top: min(-56%, 200px);">
                 <h1 style="font-size: 100px;">analysis</h1>
             </div>
-            <div style="margin-left: 5%;" class="feild_container">
+            <!-- <div style="margin-left: 5%;" class="feild_container">
                 <input placeholder="stock" class="feild1" style="display: inline-block;"></input>
                 <input placeholder="portfel" class="feild2-3" style="margin-left: 6%; display: inline-block;"></input>
                 <input placeholder="period" class="feild2-3" style="margin-left: 6%; display: inline-block;"></input>
-            </div>
+            </div> -->
+            <form method="GET" action="/chart/">
+                <input placeholder="stock" name="stock" class="feild1" style="display: inline-block;"/>
+                <input placeholder="portfel" name="portfel" class="feild2-3" style="margin-left: 6%; display: inline-block;"/>
+                <input placeholder="period" name="period" class="feild2-3" style="margin-left: 6%; display: inline-block;"/>
+                <input type="submit" value="Start" class="feild2-3" style="margin-left: 6%; display: inline-block;"/>
+            </form>
             <div style="margin-top: 4%; margin-left: max(12%, 80px);">
                 <div class="plot-container" style="display: inline-block;"> <img src={{url}} alt="Chart" height="100%" width="100%"> </div>
                 <div class="analysis" style=" display: inline-block;"></div>
