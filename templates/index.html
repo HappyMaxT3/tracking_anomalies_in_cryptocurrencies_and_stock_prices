@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"tracking_anomalies_in_cryptocurrencies_and_stock_prices"</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+
+<body style="background-color: rgba(34, 42, 118, 1);">
+
+    <div>
+
+        <div class="back_first">
+            <div class="blue_line" ></div>
+            <div>
+                <div class="btc_logo">
+                    <img src="../static/images/btc_logo.png" alt="picture" style="width: 12%; height: 12%;">
+                </div>
+                <div class="hse_icon">
+                    <img src="../static/images/hse_icon-2.png" alt="picture" style="width: 56%; height: 56%; margin-top: 10%;">
+                </div>
+                <div class="text_page1">
+                    <h1 style=" border: 10px solid none; font-size: 100px;">anomalies</h1>
+                    <h1 style=" border: 10px solid none; font-size: 100px; margin-top: -20px;">in cryptocurrencies</h1>
+                    <h1 style=" border: 10px solid none; font-size: 100px; margin-top: -20px;">and stock prices</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+
+        <div class="back_second">
+            <div class="blue_line" ></div>
+        </div>
+        <div style = "margin-top: min(-62%, -730px);">
+            <div class="text_page2-4">
+                <h1 style="font-size: 100px;">short guide</h1>
+            </div>
+                <div class = "guide_container" style="margin-left: max(18%, 150px);">  
+                    <div class="guide_boxes">1) The dear user should enter in the required fields the name of the stock or cryptocurrencies, portfolio and period for which analysis is required</div>
+                    <div class="guide_boxes">2) In the third section of the site there will be a graf of the price of a stock or cryptocurrency and the required analisys</div>
+                    <div class="guide_boxes">3) The dear user can track anomalies according to the graph!</div>
+                </div>
+            
+        </div>
+
+    </div>
+
+    <div>
+
+        <div class="back_third">
+            <div class="blue_line_for_third" ></div>
+        </div>
+        <div>
+            <div class="text_page2-4" style="margin-top: min(-56%, 200px);">
+                <h1 style="font-size: 100px;">analysis</h1>
+            </div>
+            <!-- <div style="margin-left: 5%;" class="feild_container">
+                <input placeholder="stock" class="feild1" style="display: inline-block;"></input>
+                <input placeholder="portfel" class="feild2-3" style="margin-left: 6%; display: inline-block;"></input>
+                <input placeholder="period" class="feild2-3" style="margin-left: 6%; display: inline-block;"></input>
+            </div> -->
+            <form method="GET" action="/chart/">
+                <input placeholder="stock" name="stock" class="feild1" style="display: inline-block;"/>
+                <input placeholder="portfel" name="portfel" class="feild2-3" style="margin-left: 6%; display: inline-block;"/>
+                <input placeholder="period" name="period" class="feild2-3" style="margin-left: 6%; display: inline-block;"/>
+                <input type="submit" value="Start" class="feild2-3" style="margin-left: 6%; display: inline-block;"/>
+            </form>
+            <div style="margin-top: 4%; margin-left: max(12%, 80px);">
+                <div class="plot-container" style="display: inline-block;"> <img src={{url}} alt="Chart" height="100%" width="100%"> </div>
+                <div class="analysis" style=" display: inline-block;"></div>
+            </div>
+    
+        </div>
+
+    </div>
+
+    <footer>
+
+        <div class="footer">
+            <h1 style="font-size: 100px;" class = "text_page2-4">about us</h1>
+            <div class = "footer_text" >We are four developers studying at Higher School of Economics and this site is our first year coursework. We hope this is useful to you in analizing stock prices and cryptocurrencies!</div>
+            <div class = "footer_text" style="margin-top: 1%;">The team:</div>
+            <div class = "footer_text" style="margin-top: -1%;">Design &nbsp &nbsp &nbsp &nbspElina Minakova &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp(edminakova@edu.hse.ru)</div>
+            <div class = "footer_text" style="margin-top: -1%;">Backend &nbsp &nbsp  Xeniia Gudkova & Vladimir Matsnev &nbsp (kdgudkova@edu.hse.ru & vdmatsnev@edu.hse.ru)</div>
+            <div class = "footer_text" style="margin-top: -1%;">Frontend &nbsp &nbsp Max Tolmachev &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp (mstolmachev@edu.hse.ru)</div>
+        </div>
+        
+
+    </footer>
+        
+
+    
+</body>
+
+</html>
