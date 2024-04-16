@@ -8,11 +8,11 @@
 .back_first{
     background-color: rgba(29, 68, 167, 1);
     width: 100%;
-    height: 103vmin;
+    height: 95vmin;
 
     margin-top: -1%;
     min-width: 1400px;
-    min-height: 900px;
+    min-height: 850px;
 
     z-index: 0;
 }
@@ -21,11 +21,11 @@
 .back_second{
     background-color: rgba(19, 51, 134, 1);
     width: 100%;
-    height: 130vmin;
+    height: 110vmin;
 
-    margin-top: -1%;
+    margin-top: -2%;
     min-width: 1400px;
-    min-height: 900px;
+    min-height: 950px;
 
     z-index: 0;
 }
@@ -36,35 +36,11 @@
     width: 100%;
     height: 120vmin;
 
-    margin-top: 18%;
+    margin-top: 1%;
     max-height: 1400px;
     min-width: 1400px;
 
     z-index: 0;
-}
-
-
-.blue_line{
-    background-color: rgba(34, 42, 118, 1);
-
-    width: 6%;
-    height: 150vmin;
-    min-height: 1300px;
-
-    margin-left: -1%;
-
-    z-index: 1;
-}
-
-.blue_line_for_third{
-    background-color: rgba(34, 42, 118, 1);
-
-    width: 5%;
-    height: 153vmin;
-
-    margin-left: -1%;
-
-    z-index: 1;
 }
 
 .footer{
@@ -81,15 +57,13 @@
 
 .btc_logo{
     margin-left: 10%;
-    margin-top: min(-50%, -1300px);
-    margin-top: max(-75%, -1550px);
 
     z-index: 1;
 }
 
 .hse_icon{
     margin-left: 81%;
-    margin-top: max(-14%, -1300px);
+    margin-top: max(-11%, -1300px);
 
     z-index: 1;
 }
@@ -107,20 +81,19 @@
 
 .text_page2-4{
     text-align: center;
-    margin-left: max(0%, 100px);
+
+    margin-top: 2%;
 
     color: rgba(255, 255, 255, 1);
     font-family:  'Krub ExtraLight', sans-serif;
 }
 
 .guide_container{
-
     margin-top: 5%;
-    margin-left: min(10%, 500px);
 
     display: flex;
     flex-direction: row;
-    width: 70%;
+    width: 80%;
     justify-content: space-around;
 
 }
