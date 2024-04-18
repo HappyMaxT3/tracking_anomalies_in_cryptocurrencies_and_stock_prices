@@ -68,6 +68,11 @@
     z-index: 1;
 }
 
+.reg_button{
+    height: 50px;
+    width: 50px;
+}
+
 .text_page1{
     width: 1000px;
 
@@ -79,7 +84,22 @@
     font-family:  'Krub ExtraLight', sans-serif;
 }
 
-.text_page2-4{
+.text_page3{
+    text-align: center;
+
+    margin-top: 2%;
+    margin-left: 25%;
+
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    justify-content: space-around;
+
+    color: rgba(255, 255, 255, 1);
+    font-family:  'Krub ExtraLight', sans-serif;
+}
+
+.text_page2_4{
     text-align: center;
 
     margin-top: 2%;
@@ -137,7 +157,7 @@
     font-size: x-large;
     padding: 3px;
 
-    width: 40%;
+    width: 35%;
     height: 70px;
 }
 
@@ -149,8 +169,48 @@
     font-size: x-large;
     padding: 3px;
 
-    width: 20%;
+    width: 17%;
     height: 70px;
+}
+
+.start_button{
+    border: none;
+    border-radius: 20px;
+    background-color: rgba(18, 94, 63, 1);
+    color: rgba(255, 255, 255, 1);
+    font-size: x-large;
+    padding: 10px;
+    text-align: left;
+
+    width: 17%;
+    height: 70px;
+}
+
+.check_for_notifications_container{
+    margin-top: 2%;
+    margin-left: 5%;
+
+    display: flex;
+    flex-direction: row;
+    width: 35%;
+    justify-content: space-around;
+
+    font-family:  'Krub ExtraLight', sans-serif;
+    color: white;
+}
+
+.custom_checkbox {
+    width: 30px;
+    height: 30px;
+}
+
+.label_checkbox{
+    width: 70%;
+    height: 20%;
+    background-color: rgba(65, 76, 188, 1);
+    padding: 5px;
+    text-align: center;
+    border-radius: 10px;
 }
 
 .grafic{
