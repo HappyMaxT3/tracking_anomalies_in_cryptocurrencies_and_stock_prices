@@ -1,0 +1,255 @@
+@font-face {
+    font-family: 'Krub ExtraLight';
+    src: url('../fonts/Krub-ExtraLight.woff');
+}
+
+
+
+.back_first{
+    background-color: rgba(29, 68, 167, 1);
+    width: 100%;
+    height: 95vmin;
+
+    margin-top: -1%;
+    min-width: 1400px;
+    min-height: 850px;
+
+    z-index: 0;
+}
+
+
+.back_second{
+    background-color: rgba(19, 51, 134, 1);
+    width: 100%;
+    height: 110vmin;
+
+    margin-top: -2%;
+    min-width: 1400px;
+    min-height: 950px;
+
+    z-index: 0;
+}
+
+
+.back_third{
+    background-color: rgba(34, 42, 118, 1);
+    width: 100%;
+    height: 220vmin;
+
+    margin-top: 1%;
+    min-width: 1400px;
+    min-height: 1600px;
+
+    z-index: 0;
+}
+
+.footer{
+    background-color: rgba(100, 111, 132, 1);
+    width: 100%;
+    height: 60vmin;
+
+    margin-top: 4%;
+    min-width: 1400px;
+    min-height: 550px;
+
+    z-index: 2;
+}
+
+.btc_logo{
+    margin-left: 10%;
+
+    z-index: 1;
+}
+
+.hse_icon{
+    margin-left: 81%;
+    margin-top: max(-11%, -1300px);
+
+    z-index: 1;
+}
+
+.reg_button{
+    height: 50px;
+    width: 50px;
+}
+
+.text_page1{
+    width: 1000px;
+
+    margin-left: 180px;
+    margin-top: 9%;
+    
+    text-align: left;
+    color: rgba(255, 255, 255, 1);
+    font-family:  'Krub ExtraLight', sans-serif;
+}
+
+.text_page3{
+    text-align: center;
+
+    margin-top: 2%;
+    margin-left: 25%;
+
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    justify-content: space-around;
+
+    color: rgba(255, 255, 255, 1);
+    font-family:  'Krub ExtraLight', sans-serif;
+}
+
+.text_page2_4{
+    text-align: center;
+
+    margin-top: 2%;
+
+    color: rgba(255, 255, 255, 1);
+    font-family:  'Krub ExtraLight', sans-serif;
+}
+
+.guide_container{
+    margin-top: 5%;
+
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-around;
+
+}
+
+.guide_boxes{
+    width: 15%;
+    height: 40%;
+    min-height: 500px;
+    min-width: 300px;
+
+    color: rgba(255, 255, 255, 1);
+    font-size: xx-large;
+    font-family:  'Krub ExtraLight', sans-serif;
+
+    border: 2px solid rgba(255, 255, 255, 1);
+    border-radius: 40px;
+    padding: 15px;
+    background-color: rgba(33, 67, 152, 1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.feild_container{
+
+    margin-top: 2%;
+
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    min-width: 700px;
+    justify-content: space-around;
+}
+
+.feild1{
+    border: none;
+    border-radius: 20px;
+    background-color: rgba(41, 53, 168, 1);
+    color: rgba(255, 255, 255, 1);
+    font-size: x-large;
+    padding: 3px;
+
+    width: 35%;
+    height: 70px;
+}
+
+.feild2-3{
+    border: none;
+    border-radius: 20px;
+    background-color: rgba(41, 53, 168, 1);
+    color: rgba(255, 255, 255, 1);
+    font-size: x-large;
+    padding: 3px;
+
+    width: 17%;
+    height: 70px;
+}
+
+.start_button{
+    border: none;
+    border-radius: 20px;
+    background-color: rgba(18, 94, 63, 1);
+    color: rgba(255, 255, 255, 1);
+    font-size: x-large;
+    padding: 10px;
+    text-align: left;
+
+    width: 17%;
+    height: 70px;
+}
+
+.check_for_notifications_container{
+    margin-top: 2%;
+    margin-left: 5%;
+
+    display: flex;
+    flex-direction: row;
+    width: 35%;
+    justify-content: space-around;
+
+    font-family:  'Krub ExtraLight', sans-serif;
+    color: white;
+}
+
+.custom_checkbox {
+    width: 30px;
+    height: 30px;
+}
+
+.label_checkbox{
+    width: 70%;
+    height: 20%;
+    background-color: rgba(65, 76, 188, 1);
+    padding: 5px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.grafic{
+    width: 60%;
+    height: 700px;
+    min-width: 750px;
+
+    border: 3px solid rgba(97, 109, 218, 1);
+    background-color: rgba(13, 18, 69, 1);
+    border-radius: 15px;
+}
+
+.news{
+    margin-top: 3%;
+
+    width: 83%;
+    height: 350px;
+    min-width: 750px;
+
+    border: 3px solid rgba(255, 255, 255, 1);
+    background-color: rgba(43, 51, 132, 1);
+    border-radius: 30px;
+}
+
+.analysis{
+    width: 21%;
+    height: 700px;
+    min-width: 330px;
+
+    border: 3px solid rgba(97, 109, 218, 1);
+    background-color: rgba(13, 18, 69, 1);
+    border-radius: 15px;
+}
+
+.footer_text{
+
+    color: rgba(255, 255, 255, 1);
+    font-size: x-large;
+    font-family:  'Krub ExtraLight', sans-serif;
+    padding: 20px;
+}
+
