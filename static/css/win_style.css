@@ -1,0 +1,120 @@
+@font-face {
+    font-family: 'Krub ExtraLight';
+    src: url('../fonts/Krub-ExtraLight.woff');
+}
+
+.window{
+    width: 35%;
+    height: 35%;
+    min-height: 300px;
+    min-width: 300px;
+
+    margin: 50px auto;
+    background-color: rgba(180, 187, 255, 1); 
+    padding: 20px;
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.arrow{
+    margin-top: 2px;
+    margin-left: 2px;
+}
+
+.title{
+    font-family:  'Krub ExtraLight', sans-serif;
+    text-align: center;
+    font-size: xx-large;
+    color: black;
+
+    margin-top: -3%;
+}
+
+.input_win{
+    border: 2px solid black;
+    border-radius: 10px;
+    outline: none;
+    background-color: rgba(180, 187, 255, 1);
+    color: black;
+    font-size: x-large;
+    padding: 10px;
+
+    width: 80%;
+    height: 70px;
+    margin-left: 10%;
+    margin-top: 2%;
+
+    font-family:  'Krub ExtraLight', sans-serif;
+}
+
+.down_button_continue{
+    border-radius: 10px;
+    background-color: rgba(34, 42, 118, 1);
+    color: white;
+    border: none;
+    text-align: center;
+
+    width: 50%;
+    height: 60px;
+    margin-left: 25%;
+
+    font-family:  'Krub ExtraLight', sans-serif;
+    font-size: x-large;
+}
+
+.down_button_delete{
+    border-radius: 10px;
+    background-color: rgba(166, 46, 46, 1);
+    color: white;
+    border: none;
+    text-align: center;
+
+    width: 50%;
+    height: 70px;
+    margin-left: 25%;
+
+    font-family:  'Krub ExtraLight', sans-serif;
+    font-size: x-large;
+}
+
+.down_text_container{
+
+    margin-top: 2%;
+    margin-left: 26%;
+
+    display: flex;
+    flex-direction: row;
+    width: 52%;
+    justify-content: space-around;
+
+    font-family:  'Krub ExtraLight', sans-serif;
+}
+
+.label_checkbox{
+    width: 80%;
+    height: 20%;
+    background-color: rgba(65, 76, 188, 1);
+    padding: 5px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.check_for_notifications_container{
+    margin-top: 2%;
+    margin-left: 10%;
+
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    justify-content: space-around;
+
+    font-family:  'Krub ExtraLight', sans-serif;
+    
+}
+
+.custom_checkbox {
+    width: 30px;
+    height: 30px;
+}
+
+

@@ -1,5 +1,6 @@
 venv
 .DS_Store
+src/__pycache__
 public/*
 __pycache__
 plot.png
