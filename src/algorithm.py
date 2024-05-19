@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib
 import yfinance as yf
 from datetime import datetime, timedelta
 import statsmodels.api as sm
@@ -32,7 +33,8 @@ def make_graph(stock, portfel, period):
     lower_bound = model.fittedvalues - lower_bound_multiplier * rolling_std_residuals
     upper_bound = model.fittedvalues + upper_bound_multiplier * rolling_std_residuals
 
-    #Построение графиков текущей и предполагаемой цены
+    # Построение графиков текущей и предполагаемой цены
+    matplotlib.use('Agg')
     plt.figure(figsize=(15, 6))
     plt.plot(stock_data.index, stock_data['Close'], color="green", label='Реальная цена акции')
     plt.plot(stock_data.index, model.fittedvalues, color="green", linestyle=":", label='Модель цены акции')
