@@ -59,18 +59,18 @@
                         </div>
                     </button>
                 </div>
-                <div style="margin-left: 5%;" class="feild_container">
-                    <input placeholder="stock" class="feild1" style="display: inline-block;"></input>
-                    <input placeholder="portfel" class="feild2-3" style="margin-left: 4%; display: inline-block;"></input>
-                    <input placeholder="period" class="feild2-3" style="margin-left: 4%; display: inline-block;"></input>
-                    <button class="start_button" style="margin-left: 4%; display: inline-block;">Start</button>
-                </div>
+                <form method="post" action="/chart/" style="margin-left: 5%;" class="feild_container">
+                    <input placeholder="stock" name="stock" class="feild1" style="display: inline-block;"/>
+                    <input placeholder="portfel" name="portfel" class="feild2-3" style="margin-left: 4%; display: inline-block;"/>
+                    <input placeholder="period" name="period" class="feild2-3" style="margin-left: 4%; display: inline-block;"/>
+                    <input type="submit" value="Start" class="start_button" style="margin-left: 4%; display: inline-block;"/>
+                </form>
                 <div class="check_for_notifications_container">
                     <input type="checkbox" class="custom_checkbox"></input>
                     <label class="label_checkbox">I want to receive notifications about changes</label>
                 </div>
                 <div style="margin-top: 2%; margin-left: max(12%, 80px);">
-                    <div class="grafic" style="display: inline-block;"></div>
+                    <div class="grafic" style="display: inline-block;"><img src={{url}} alt="Chart" height="100%" width="100%"></div>
                     <div class="analysis" style=" display: inline-block;"></div>
                 </div>
 
