@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail, Message
 from sqlalchemy import exists
 from sqlalchemy.dialects.postgresql import JSON
 from src import algorithm, password_generator
@@ -10,6 +11,13 @@ app.secret_key = 'secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///anomaly_detection.db'
 db = SQLAlchemy(app)
 
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'trackinganomalies@gmail.com'
+app.config['MAIL_PASSWORD'] = 'kvcn thxh zmim cmol'
+mail = Mail(app)
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -18,6 +26,11 @@ class User(db.Model):
 
 with app.app_context():
     db.create_all()
+    
+def send_email(email, password):
+    msg = Message('Your Account Password', sender='trackinganomalies@gmail.com', recipients=[email])
+    msg.body = f'Your password: {password}'
+    mail.send(msg)
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
@@ -75,6 +88,7 @@ def create_account():
         email_adress = request.form['email_adress']
         password = password_generator.generate()
         new_user = User(email=email_adress, password=password, monitored_stocks=[])
+        send_email(email_adress, password)
         print(email_adress, password)
         db.session.add(new_user)
         db.session.commit()
