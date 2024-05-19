@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import exists
+from sqlalchemy.dialects.postgresql import JSON
 from src import algorithm, password_generator
+import json
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'
@@ -12,7 +14,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(12), nullable=False)
-    # monitored_stocks = db.Column(db.String(255), lazy=True)
+    monitored_stocks = db.Column(JSON)
 
 with app.app_context():
     db.create_all()
@@ -25,8 +27,14 @@ def index():
         period = request.form['period']
         algorithm.make_graph(stock, portfel, period)
         if request.form.get('checkbox') == 'on':
-            if session.get('user_id'):
-                print("You will receive notice about notifications on id ", session.get('user_id'))
+            user_id = session.get('user_id')
+            if user_id:
+                user = User.query.get(user_id)
+                monitored_stocks = json.loads(user.monitored_stocks) if user.monitored_stocks else []
+                monitored_stocks.append({'stock': stock, 'portfel': portfel})
+                user.monitored_stocks = json.dumps(monitored_stocks)
+                db.session.commit()
+                print("Updated monitored_stocks for user with id ", user_id)
             else:
                 return redirect(url_for("log_in_account"))
         return render_template('index.html', url='/static/images/plot.png')
@@ -66,7 +74,7 @@ def create_account():
     if request.method == 'POST':
         email_adress = request.form['email_adress']
         password = password_generator.generate()
-        new_user = User(email=email_adress, password=password)
+        new_user = User(email=email_adress, password=password, monitored_stocks=[])
         print(email_adress, password)
         db.session.add(new_user)
         db.session.commit()
