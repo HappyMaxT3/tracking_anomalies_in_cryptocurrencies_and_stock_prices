@@ -11,28 +11,24 @@
     
     <div class="window">
         
-        <button style="border: none; background: none; border-radius: 30px;">
+        <a href="/"><button style="border: none; background: none; border-radius: 30px;">
             <div class="arrow">
                 <img src="../../static/images/arrow.png" alt="arrow" style="height: 60px; width: 60px;" >
             </div>
-        </button>
+        </button></a>
 
-        <h1 class="title">Create an Account</h1>
+        <h1 class="title">Your Account</h1>
 
-        <input placeholder="e-mail adress" class="input_win"></input>
-        <input placeholder="code" class="input_win" style="margin-top: 4%;"></input>
+        <input placeholder="e-mail adress" class="input_win" type="text" id="your_email" value="{{ your_email }}" readonly></input>
+
+        <h1 class="title" style="margin-top: 5%;">Notifications</h1>
 
         <div class="check_for_notifications_container">
             <input type="checkbox" class="custom_checkbox"></input>
             <label class="label_checkbox">I want to receive notifications about changes</label>
         </div>
 
-        <div class="down_text_container">
-            <div>Already have an account?</div>
-            <p><a href="LINK">Log in</a></p>
-        </div>
-
-        <button class="down_button_continue">Continue</button>
+        <form method="POST"><button type="submit" class="down_button_delete" style="margin-top: 5%;">Delete Account</button></form>
         
     </div>
 
