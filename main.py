@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
+from apscheduler.schedulers.background import BackgroundScheduler
 from sqlalchemy import exists
 from sqlalchemy.dialects.postgresql import JSON
 from src import algorithm, password_generator
@@ -10,6 +11,7 @@ app = Flask(__name__)
 app.secret_key = 'secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///anomaly_detection.db'
 db = SQLAlchemy(app)
+scheduler = BackgroundScheduler()
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
@@ -27,7 +29,20 @@ class User(db.Model):
 with app.app_context():
     db.create_all()
     
-def send_email(email, password):
+def fetch_and_detect_anomalies():
+    print('----------------------- Background task executed -----------------------')
+    users = User.query.all()
+    for user in users:
+        for i in user.monitored_stocks:
+            stock, portfel = i.split(',')
+            type_of_anomaly = algorithm.detect_anomalies(stock, portfel)
+            if type_of_anomaly in ['fallen', 'increased']:
+                msg = Message('Anomaly detected', sender='trackinganomalies@gmail.com', recipients=user.email)
+                msg.body = f'Anomaly was detected in {stock}. The share price has {type_of_anomaly}.'
+                mail.send(msg)
+    
+    
+def send_password(email, password):
     msg = Message('Your Account Password', sender='trackinganomalies@gmail.com', recipients=[email])
     msg.body = f'Your password: {password}'
     mail.send(msg)
@@ -88,12 +103,19 @@ def create_account():
         email_adress = request.form['email_adress']
         password = password_generator.generate()
         new_user = User(email=email_adress, password=password, monitored_stocks=[])
-        send_email(email_adress, password)
+        send_password(email_adress, password)
         print(email_adress, password)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for("log_in_account"))
     return render_template("create_acc.html")
 
+def scheduled_fetch_data():
+    with app.app_context():
+        fetch_and_detect_anomalies()
+
+scheduler.add_job(func=scheduled_fetch_data, trigger='interval', seconds=15, id='fetch_data_job')
+scheduler.start()
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
