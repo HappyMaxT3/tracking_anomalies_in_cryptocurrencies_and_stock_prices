@@ -2,10 +2,11 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
 from apscheduler.schedulers.background import BackgroundScheduler
-from sqlalchemy import exists
 from sqlalchemy.dialects.postgresql import JSON
 from src import algorithm, password_generator
 import json
+import yfinance as yf
+import datetime
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'
@@ -53,6 +54,17 @@ def index():
         stock = request.form['stock']
         portfel = request.form['portfel']
         period = request.form['period']
+        news = yf.Ticker(stock).news
+        formatted_news = []
+        for news_item in news:
+            timestamp = int(news_item['providerPublishTime'])
+            formatted_date = datetime.datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y %H:%M')
+            formatted_news.append({
+                'title': news_item['title'],
+                'publisher': news_item['publisher'],
+                'link': news_item['link'],
+                'formatted_date': formatted_date
+            })
         algorithm.make_graph(stock, portfel, period)
         if request.form.get('checkbox') == 'on':
             user_id = session.get('user_id')
@@ -65,7 +77,7 @@ def index():
                 print("Updated monitored_stocks for user with id ", user_id)
             else:
                 return redirect(url_for("log_in_account"))
-        return render_template('index.html', url='/static/images/plot.png')
+        return render_template('index.html', url='/static/images/plot.png', news=formatted_news)
     return render_template('index.html')
 
 @app.route("/login/", methods=['GET', 'POST'])
@@ -114,7 +126,7 @@ def scheduled_fetch_data():
     with app.app_context():
         fetch_and_detect_anomalies()
 
-scheduler.add_job(func=scheduled_fetch_data, trigger='interval', seconds=15, id='fetch_data_job')
+# scheduler.add_job(func=scheduled_fetch_data, trigger='interval', seconds=15, id='fetch_data_job')
 scheduler.start()
 
 if __name__ == '__main__':

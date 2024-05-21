@@ -78,8 +78,13 @@
 
                 <div style="margin: auto;">
                     <h1 style="font-size: 100px;" class = "text_page2_4">crypto news</h1>
-                    <div style="margin-left: max(12%, 80px); ">
-                        <div class="news" style="display: inline-block;"></div>
+                    <div style="margin-left: max(12%, 80px); overflow: auto; padding-left: 20px;" class="news" style="display: inline-block; padding: 10px; border-radius: 5px;">
+                        {% for news_item in news %}
+                        <strong>Title:</strong> {{ news_item.title }}<br>
+                        <strong>Source:</strong> {{ news_item.publisher }}<br>
+                        <strong>Date and time of publication:</strong> {{ news_item.formatted_date }}<br>
+                        <a href="{{ news_item.link }}"><strong>Read here</a></strong><br><br>
+                        {% endfor %}
                     </div>
                 </div>
                 
