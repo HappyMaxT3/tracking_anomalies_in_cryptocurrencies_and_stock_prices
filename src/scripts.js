@@ -4,7 +4,7 @@ $(function() {
         dateFormat: "dd-mm-yy",
         onSelect: function(dateText) {
             selectedDate = dateText;
-            console.log("Выбранная дата: " + selectedDate);
+//            console.log("Выбранная дата: " + selectedDate);
         }
     });
 

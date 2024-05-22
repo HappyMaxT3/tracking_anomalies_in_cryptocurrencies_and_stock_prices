@@ -126,7 +126,7 @@ def scheduled_fetch_data():
         fetch_and_detect_anomalies()
 
 # scheduler.add_job(func=scheduled_fetch_data, trigger='interval', seconds=15, id='fetch_data_job')
-scheduler.start()
+#scheduler.start()
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
