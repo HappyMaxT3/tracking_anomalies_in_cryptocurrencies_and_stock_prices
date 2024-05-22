@@ -97,15 +97,14 @@ def log_in_account():
 
 @app.route("/profile/", methods=['GET', 'POST'])
 def profile():
+    user = User.query.get(session.get('user_id'))
     if request.method == 'POST':
-        if user_id:
+        if user:
             db.session.delete(user)
             db.session.commit()
             session.pop('user_id', None)
         return redirect(url_for("index"))
 
-    user_id = session.get('user_id')
-    user = User.query.get(user_id)
     user_email = user.email
     return render_template("your_acc.html", your_email=user_email)
 
