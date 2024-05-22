@@ -11,22 +11,24 @@
     
     <div class="window">
         
-        <button style="border: none; background: none; border-radius: 30px;">
+        <a href="/"><button style="border: none; background: none; border-radius: 30px;">
             <div class="arrow">
                 <img src="../../static/images/arrow.png" alt="arrow" style="height: 60px; width: 60px;" >
             </div>
-        </button>
+        </button></a>
 
         <h1 class="title">Log in to continue</h1>
 
-        <input placeholder="e-mail adress" class="input_win"></input>
-        <input placeholder="password" class="input_win" style="margin-top: 4%;"></input>
+        <form method="post">
+            <input placeholder="e-mail adress" name="email_adress" class="input_win"></input>
+            <input placeholder="password" name="password" class="input_win" style="margin-top: 4%;"></input>
 
-        <button class="down_button_continue" style="margin-top: 4%;">Continue</button>
+            <button class="down_button_continue" style="margin-top: 4%;">Continue</button>
+        </form>
 
         <div class="down_text_container">
             <div>Don`t have an account?</div>
-            <p><a href="LINK">Sign up</a></p>
+            <p><a href="/create_account/">Sign up</a></p>
         </div>
         
 
