@@ -196,6 +196,7 @@
     justify-content: space-around;
 
     font-family:  'Krub ExtraLight', sans-serif;
+    font-size: x-large;
     color: white;
 }
 
@@ -226,7 +227,7 @@
 .news{
     margin-top: 3%;
 
-    width: 83%;
+    width: 73%;
     height: 350px;
     min-width: 750px;
 
