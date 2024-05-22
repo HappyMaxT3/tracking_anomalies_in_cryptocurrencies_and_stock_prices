@@ -27,7 +27,7 @@
     font-size: xx-large;
     color: black;
 
-    margin-top: -4%;
+    margin-top: -3%;
 }
 
 .input_win{
@@ -70,7 +70,7 @@
     text-align: center;
 
     width: 50%;
-    height: 60px;
+    height: 70px;
     margin-left: 25%;
 
     font-family:  'Krub ExtraLight', sans-serif;
@@ -84,7 +84,7 @@
 
     display: flex;
     flex-direction: row;
-    width: 48%;
+    width: 52%;
     justify-content: space-around;
 
     font-family:  'Krub ExtraLight', sans-serif;

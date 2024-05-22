@@ -38,7 +38,7 @@
 
     margin-top: 1%;
     min-width: 1400px;
-    min-height: 1600px;
+    min-height: 1620px;
 
     z-index: 0;
 }
@@ -102,7 +102,7 @@
 .text_page2_4{
     text-align: center;
 
-    margin-top: 2%;
+    margin-top: 1%;
 
     color: rgba(255, 255, 255, 1);
     font-family:  'Krub ExtraLight', sans-serif;
@@ -119,13 +119,13 @@
 }
 
 .guide_boxes{
-    width: 15%;
+    width: 16%;
     height: 40%;
-    min-height: 500px;
+    min-height: 550px;
     min-width: 300px;
 
     color: rgba(255, 255, 255, 1);
-    font-size: xx-large;
+    font-size: 35px;
     font-family:  'Krub ExtraLight', sans-serif;
 
     border: 2px solid rgba(255, 255, 255, 1);
@@ -196,6 +196,7 @@
     justify-content: space-around;
 
     font-family:  'Krub ExtraLight', sans-serif;
+    font-size: x-large;
     color: white;
 }
 
@@ -226,7 +227,7 @@
 .news{
     margin-top: 3%;
 
-    width: 83%;
+    width: 86%;
     height: 350px;
     min-width: 750px;
 
