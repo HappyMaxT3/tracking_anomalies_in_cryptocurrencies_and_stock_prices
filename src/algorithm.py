@@ -6,9 +6,8 @@ import statsmodels.api as sm
 
 def make_graph(stock, portfel, period):
     # Определение диапазона времени для исследования
-    start_time = datetime.strptime(period, "%d-%m-%Y")
-    long = datetime.now() - start_time
-    start_date = (datetime.now() - timedelta(days=long.days)).strftime('%Y-%m-%d')
+    start_date = datetime.strptime(period, "%d-%m-%Y")
+    start_date.strftime('%Y-%m-%d')
     end_date = datetime.now().strftime('%Y-%m-%d')
 
     # Запрос данных по акции и портфелю из API на заданном отрезке времени

@@ -85,7 +85,7 @@ def log_in_account():
     if session.get('user_id'):
         return redirect(url_for("profile"))
     if request.method == 'POST':
-        email_adress = request.form['email_adress']
+        email_adress = request.form['email']
         password = request.form['password']
         user = User.query.filter_by(email=email_adress, password=password).first()
         if user:
