@@ -12,7 +12,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-    <script src="../src/scripts.js" defer></script>
+    <script src="../static/js/scripts.js" defer></script>
 
 
 </head>
@@ -68,18 +68,20 @@
                         </div>
                     </button></a>
                 </div>
-                <form method="post">
+                <form method="post" id="validNames">
                     <div style="margin-left: 5%;" class="feild_container">
-                        <input placeholder="stock" name="stock" class="feild1" style="display: inline-block;"/>
-                        <input placeholder="portfel" name="portfel" class="feild2-3" style="margin-left: 4%; display: inline-block;"/>
-                        <input placeholder="period (DD-MM-YYYY)" name="period" type="text" id="datepicker" class="feild2-3" style="margin-left: 4%; display: inline-block;" />
+                        <input placeholder="stock" id="stock" name="stock" class="feild1" style="display: inline-block;" required/>
+                        <input placeholder="portfel" id="portfel" name="portfel" class="feild2-3" style="margin-left: 4%; display: inline-block;" required/>
+                        <input placeholder="period (DD-MM-YYYY)" type="text" id="datepicker" class="feild2-3" style="margin-left: 4%; display: inline-block;" >
                         <!-- <img src="../static/images/calendar_img.png" id="calendar-icon" alt="Calendar Icon" style="width: 40px; height: 40px; margin-left: 100px; display: inline-block;"> -->
                         <input type="submit" value="Start" class="start_button" style="margin-left: 4%; display: inline-block;"/>
                     </div>
                     <div class="check_for_notifications_container">
                         <input type="checkbox" name="checkbox" class="custom_checkbox"></input>
                         <label class="label_checkbox">I want to receive notifications about changes</label>
+                        <label class="error-message"><span id="errorMessage" ></span></label>
                     </div>
+                    
                 </form>
                 <div style="margin-top: 2%; margin-left: max(12%, 80px);">
                     <div class="grafic" style="display: inline-block;"><img src={{url}} alt="Chart" height="100%" width="100%"></div>
