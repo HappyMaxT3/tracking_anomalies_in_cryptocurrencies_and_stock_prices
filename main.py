@@ -53,7 +53,8 @@ def index():
     if request.method == 'POST':
         stock = request.form['stock']
         portfel = request.form['portfel']
-        period = request.form['period']
+        period_start = request.form['period_start']
+        period_end = request.form['period_end']
         news = yf.Ticker(stock).news
         formatted_news = []
         for news_item in news:
@@ -65,7 +66,7 @@ def index():
                 'link': news_item['link'],
                 'formatted_date': formatted_date
             })
-        algorithm.make_graph(stock, portfel, period)
+        algorithm.make_graph(stock, portfel, period_start, period_end)
         if request.form.get('checkbox') == 'on':
             user_id = session.get('user_id')
             if user_id:

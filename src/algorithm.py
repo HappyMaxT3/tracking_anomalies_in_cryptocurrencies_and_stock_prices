@@ -4,11 +4,12 @@ import yfinance as yf
 from datetime import datetime, timedelta
 import statsmodels.api as sm
 
-def make_graph(stock, portfel, period):
+def make_graph(stock, portfel, period_start, period_end):
     # Определение диапазона времени для исследования
-    start_date = datetime.strptime(period, "%d-%m-%Y")
+    start_date = datetime.strptime(period_start, "%d-%m-%Y")
     start_date.strftime('%Y-%m-%d')
-    end_date = datetime.now().strftime('%Y-%m-%d')
+    end_date = datetime.strptime(period_end, "%d-%m-%Y")
+    end_date.strftime('%Y-%m-%d')
 
     # Запрос данных по акции и портфелю из API на заданном отрезке времени
     symbol = stock
