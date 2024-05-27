@@ -3,6 +3,26 @@
     src: url('../fonts/Krub-ExtraLight.woff');
 }
 
+#scrollButton {
+    position: fixed;
+
+    margin-left: 90%;
+    bottom: 20px;
+    right: 20px;
+    padding: 8px 8px;
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0); 
+    opacity: 5;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+
+    z-index: 3; 
+}
+
+#scrollButton:hover {
+    background-color: rgba(29, 68, 167, 1);
+}
 
 
 .back_first{
@@ -142,6 +162,8 @@
 
     margin-top: 2%;
 
+    font-family:  'Krub ExtraLight', sans-serif;
+
     display: flex;
     flex-direction: row;
     width: 90%;
@@ -173,12 +195,38 @@
     height: 70px;
 }
 
+.feild_period_start{
+    border: none;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    background-color: rgba(41, 53, 168, 1);
+    color: rgba(255, 255, 255, 1);
+    font-size: x-large;
+    padding: 3px;
+
+    width: 17%;
+    height: 70px;
+}
+
+.feild_period_end{
+    border: none;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: rgba(41, 53, 168, 1);
+    color: rgba(255, 255, 255, 1);
+    font-size: x-large;
+    padding: 3px;
+
+    width: 17%;
+    height: 70px;
+}
+
 .start_button{
     border: none;
     border-radius: 20px;
     background-color: rgba(18, 94, 63, 1);
     color: rgba(255, 255, 255, 1);
-    font-size: x-large;
+    font-size: xx-large;
     padding: 10px;
     text-align: left;
 
@@ -187,12 +235,12 @@
 }
 
 .check_for_notifications_container{
-    margin-top: 2%;
+    margin-top: 3%;
     margin-left: 5%;
 
     display: flex;
     flex-direction: row;
-    width: 35%;
+    width: 55%;
     justify-content: space-around;
 
     font-family:  'Krub ExtraLight', sans-serif;
@@ -214,6 +262,20 @@
     border-radius: 10px;
 }
 
+.error-message{
+    background-color: rgba(41, 53, 168, 1);
+    border-radius: 20px;
+    margin-left: 1%;
+    height: 70px;
+    
+    padding: 16px;
+    display: none;
+    text-align: center;
+    font-family:  'Krub ExtraLight', sans-serif;
+    font-size: x-large;
+    color: rgba(240, 82, 82, 1);
+}
+
 .grafic{
     width: 83%;
     height: 700px;
@@ -226,8 +288,11 @@
 
 .news{
     margin-top: 3%;
+    padding: 8px;
+    font-family:  'Krub ExtraLight', sans-serif;
+    color: rgba(255, 255, 255, 1);
 
-    width: 86%;
+    width: 72%;
     height: 350px;
     min-width: 750px;
 
@@ -236,7 +301,7 @@
     border-radius: 30px;
 }
 
-.analysis{
+/* .analysis{
     width: 21%;
     height: 700px;
     min-width: 330px;
@@ -244,7 +309,7 @@
     border: 3px solid rgba(97, 109, 218, 1);
     background-color: rgba(13, 18, 69, 1);
     border-radius: 15px;
-}
+} */
 
 .footer_text{
 
