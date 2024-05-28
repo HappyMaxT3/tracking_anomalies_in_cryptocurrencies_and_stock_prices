@@ -5,55 +5,63 @@ from datetime import datetime, timedelta
 import statsmodels.api as sm
 
 def make_graph(crypto, market_index, period_start, period_end):
-    # Определение диапазона времени для исследования
-    start_date = datetime.strptime(period_start, "%d-%m-%Y")
-    start_date.strftime('%Y-%m-%d')
-    end_date = datetime.strptime(period_end, "%d-%m-%Y")
-    end_date.strftime('%Y-%m-%d')
+    try:
+        # Определение диапазона времени для исследования
+        start_date = datetime.strptime(period_start, "%d-%m-%Y")
+        start_date.strftime('%Y-%m-%d')
+        end_date = datetime.strptime(period_end, "%d-%m-%Y")
+        end_date.strftime('%Y-%m-%d')
 
-    # Запрос данных по криптовалюте и индексу рынка из API на заданном отрезке времени
-    crypto_data = yf.download(crypto, start=start_date, end=end_date, interval='30m')
-    market_data = yf.download(market_index, start=start_date, end=end_date, interval='30m')
+        # Запрос данных по криптовалюте и индексу рынка из API на заданном отрезке времени
+        crypto_data = yf.download(crypto, start=start_date, end=end_date, interval='30m')
+        market_data = yf.download(market_index, start=start_date, end=end_date, interval='30m')
 
-    # Выравнивание наборов данных
-    crypto_data, market_data = crypto_data.align(market_data, join='inner', axis=0)
+        # Проверка наличия данных
+        if crypto_data.empty or market_data.empty:
+            raise ValueError("No data available for the specified tickers.")
 
-    # Построение модели регрессии
-    X = sm.add_constant(market_data['Close'])
-    y = crypto_data['Close']
-    model = sm.OLS(y, X).fit()
+        # Выравнивание наборов данных
+        crypto_data, market_data = crypto_data.align(market_data, join='inner', axis=0)
 
-    # Расчет остатков и плавающего стандартного отклонения остатков
-    residuals = model.resid
-    rolling_std_residuals = residuals.rolling(window=20, min_periods=1).std()
+        # Построение модели регрессии
+        X = sm.add_constant(market_data['Close'])
+        y = crypto_data['Close']
+        model = sm.OLS(y, X).fit()
 
-    # Определение границ аномалий с использованием стандартного отклонения
-    lower_bound_multiplier = 1.5
-    upper_bound_multiplier = 1.5
-    lower_bound = model.fittedvalues - lower_bound_multiplier * rolling_std_residuals
-    upper_bound = model.fittedvalues + upper_bound_multiplier * rolling_std_residuals
+        # Расчет остатков и плавающего стандартного отклонения остатков
+        residuals = model.resid
+        rolling_std_residuals = residuals.rolling(window=20, min_periods=1).std()
 
-    # Построение графиков текущей и предполагаемой цены
-    matplotlib.use('Agg')
-    plt.figure(figsize=(15, 6))
-    plt.plot(crypto_data.index, crypto_data['Close'], color="green", label='Actual price')
-    plt.plot(crypto_data.index, model.fittedvalues, color="green", linestyle=":", label='Modelled price')
+        # Определение границ аномалий с использованием стандартного отклонения
+        lower_bound_multiplier = 1.5
+        upper_bound_multiplier = 1.5
+        lower_bound = model.fittedvalues - lower_bound_multiplier * rolling_std_residuals
+        upper_bound = model.fittedvalues + upper_bound_multiplier * rolling_std_residuals
 
-    # Нахождение аномалий
-    below_lower_bound = crypto_data['Close'] < lower_bound
-    above_upper_bound = crypto_data['Close'] > upper_bound
+        # Построение графиков текущей и предполагаемой цены
+        matplotlib.use('Agg')
+        plt.figure(figsize=(15, 6))
+        plt.plot(crypto_data.index, crypto_data['Close'], color="green", label='Actual price')
+        plt.plot(crypto_data.index, model.fittedvalues, color="green", linestyle=":", label='Modelled price')
 
-    # Построение аномалий под нижней границей
-    plt.scatter(crypto_data.index[below_lower_bound], crypto_data['Close'][below_lower_bound], color='red', label='Anomalies below the lower border')
+        # Нахождение аномалий
+        below_lower_bound = crypto_data['Close'] < lower_bound
+        above_upper_bound = crypto_data['Close'] > upper_bound
 
-    # Построение аномалий над верхней границей
-    plt.scatter(crypto_data.index[above_upper_bound], crypto_data['Close'][above_upper_bound], color='blue', label='Anomalies above the upper border')
+        # Построение аномалий под нижней границей
+        plt.scatter(crypto_data.index[below_lower_bound], crypto_data['Close'][below_lower_bound], color='red', label='Anomalies below the lower border')
 
-    plt.xlabel('Date')
-    plt.ylabel('Price')
-    plt.legend()
+        # Построение аномалий над верхней границей
+        plt.scatter(crypto_data.index[above_upper_bound], crypto_data['Close'][above_upper_bound], color='blue', label='Anomalies above the upper border')
 
-    plt.savefig('static/images/plot.png')
+        plt.xlabel('Date')
+        plt.ylabel('Price')
+        plt.legend()
+
+        plt.savefig('static/images/plot.png')
+    except (ValueError, KeyError) as e:
+        # прокид ошибки фронту сюда
+        print(f"Error: {str(e)}. Please check the entered tickers and try again.")
 
 
 def detect_anomalies(crypto, market_index):
