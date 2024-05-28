@@ -12,6 +12,7 @@ $(function() {
     // Инициализация Datepicker
     $("#datepicker1").datepicker({
         dateFormat: "dd-mm-yy",
+        firstDay: 1,
         onSelect: function(dateText) {
             selectedDateStart = dateText;
         }
@@ -75,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const stockErrorMessage = document.getElementById('stockErrorMessage');
     const portfelErrorMessage = document.getElementById('portfelErrorMessage');
 
-    const invalidChars = /[.,<>?=+\-~\[\]#*]/;
+    const invalidChars = /[.,<>?=+~\[\]#*]/;
     const validChasStock = /[ABCDEFGHIJKLMNOPQRSTUVWXYZ -]/;
 
     function validateInput() {
@@ -97,6 +98,10 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         } else {
             portfelErrorMessage.parentElement.style.display = 'none';
+        }
+
+        if (stockValue.includes('-USD')) {
+            portfelInput.value = stockValue;
         }
 
         return isValid;
