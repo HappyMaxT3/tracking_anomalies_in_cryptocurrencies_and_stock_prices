@@ -52,7 +52,7 @@ def send_password(email, password):
 def index():
     if request.method == 'POST':
         stock = request.form['stock']
-        portfel = request.form['portfel']
+        portfel = f"^{request.form['portfel']}"
         period_start = request.form['period_start']
         period_end = request.form['period_end']
         news = yf.Ticker(stock).news
