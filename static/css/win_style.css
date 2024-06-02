@@ -30,23 +30,6 @@
     margin-top: -3%;
 }
 
-.input_win{
-    border: 2px solid black;
-    border-radius: 10px;
-    outline: none;
-    background-color: rgba(180, 187, 255, 1);
-    color: black;
-    font-size: x-large;
-    padding: 10px;
-
-    width: 80%;
-    height: 70px;
-    margin-left: 10%;
-    margin-top: 2%;
-
-    font-family:  'Krub ExtraLight', sans-serif;
-}
-
 .down_button_continue{
     border-radius: 10px;
     background-color: rgba(34, 42, 118, 1);
@@ -115,6 +98,68 @@
 .custom_checkbox {
     width: 30px;
     height: 30px;
+}
+
+.password_container{
+    font-family:  'Krub ExtraLight', sans-serif;
+    color: rgba(255, 255, 255, 1);
+
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.hide_password_button{
+    border: none; 
+    background: none; 
+    cursor: pointer;
+    display: inline-block;
+
+    width: 10%;
+    height: 10%;
+    margin-top: 7%;
+    margin-right: 7%;
+}
+
+.password_icon{
+    width: 30px;
+    height: 30px;
+}
+
+.input_password{
+    border: 2px solid black;
+    border-radius: 10px;
+    outline: none;
+    background-color: rgba(180, 187, 255, 1);
+    color: black;
+    font-size: x-large;
+    padding: 10px;
+    display: inline-block;
+
+    width: 72%;
+    height: 70px;
+    margin-left: 10%;
+    margin-top: 2%;
+
+    font-family:  'Krub ExtraLight', sans-serif;
+}
+
+.input_win{
+    border: 2px solid black;
+    border-radius: 10px;
+    outline: none;
+    background-color: rgba(180, 187, 255, 1);
+    color: black;
+    font-size: x-large;
+    padding: 10px;
+
+    width: 80%;
+    height: 70px;
+    margin-left: 10%;
+    margin-top: 2%;
+
+    font-family:  'Krub ExtraLight', sans-serif;
 }
 
 
