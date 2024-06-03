@@ -1,24 +1,3 @@
-//hide password
-document.addEventListener('DOMContentLoaded', function () {
-    const togglePasswordButton = document.getElementById('togglePasswordButton');
-    const togglePasswordIcon = document.getElementById('togglePasswordIcon');
-    if (togglePasswordButton) {
-        togglePasswordButton.addEventListener('click', function () {
-            const passwordField = document.getElementById('password');
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                togglePasswordIcon.src = '../static/images/show_password_icon.png'; 
-                togglePasswordIcon.alt = 'Hide Password';
-            } else {
-                passwordField.type = 'password';
-                togglePasswordIcon.src = '../static/images/hide_password_icon.png'; 
-                togglePasswordIcon.alt = 'Show Password';
-            }
-        });
-    }
-});
-
-
 //scroll button
 document.getElementById('scrollButton').addEventListener('click', function() {
     // Найти целевой элемент
@@ -195,26 +174,5 @@ function autocomplete(inp, arr) {
     });
 }
 
-const suggestions = ["AAPL", "ANTANANARIVU", "ALYASKA", "BIMBIMBAMBAMFIRST", "BIMBIMBAMBAMSECOND", "PIZDEC", "SUKA", "BLYAT"];
+const suggestions = ["AAPL", "ANTANANARIVU", "ALYASKA", "AAAAAAAAA", "AAAAA", "AAAAAPIZZZDDAAAA", "BIMBIMBAMBAMFIRST", "BIMBIMBAMBAMSECOND", "PIZDEC", "SUKA", "BLYAT"];
 autocomplete(document.getElementById("stock"), suggestions);
-
-
-//email check
-document.addEventListener('DOMContentLoaded', function() {
-    var emailForm = document.getElementById('emailForm');
-    var emailInput = document.getElementById('email');
-
-    emailForm.addEventListener('submit', function(event) {
-        var emailValue = emailInput.value;
-        if (!validateEmail(emailValue)) {
-            event.preventDefault(); // Останавливаем отправку формы только если email некорректен
-        } else {
-            emailError.style.display = 'none';
-        }
-    });
-
-    function validateEmail(email) {
-        var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-});

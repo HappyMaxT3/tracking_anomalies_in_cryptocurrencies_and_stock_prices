@@ -171,16 +171,15 @@
     justify-content: space-around;
 }
 
-.feild1{
+.feild1 {
     border: none;
     border-radius: 20px;
     background-color: rgba(41, 53, 168, 1);
     color: rgba(255, 255, 255, 1);
     font-size: x-large;
     padding: 3px;
-    text-transform: uppercase;
 
-    /* width: 35%; */
+    text-transform: uppercase;
     height: 70px;
 }
 
@@ -195,12 +194,15 @@
     border-left: none;
     border-right: none;
     border-radius: 10px;
-    
+
     z-index: 1;
     top: 100%;
     left: 50;
     right: 50;
     background-color: rgba(41, 53, 168, 1);
+
+    max-height: 220px; 
+    overflow-y: auto; 
 }
 
 .autocomplete-items div {
