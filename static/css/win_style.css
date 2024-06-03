@@ -3,12 +3,11 @@
     src: url('../fonts/Krub-ExtraLight.woff');
 }
 
-.window{
+.window {
     width: 35%;
     height: 35%;
     min-height: 300px;
     min-width: 300px;
-
     margin: 50px auto;
     background-color: rgba(180, 187, 255, 1); 
     padding: 20px;
@@ -16,64 +15,56 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.arrow{
+.arrow {
     margin-top: 2px;
     margin-left: 2px;
 }
 
-.title{
-    font-family:  'Krub ExtraLight', sans-serif;
+.title {
+    font-family: 'Krub ExtraLight', sans-serif;
     text-align: center;
     font-size: xx-large;
     color: black;
-
     margin-top: -3%;
 }
 
-.down_button_continue{
+.down_button_continue {
     border-radius: 10px;
     background-color: rgba(34, 42, 118, 1);
     color: white;
     border: none;
     text-align: center;
-
     width: 50%;
     height: 60px;
     margin-left: 25%;
-
-    font-family:  'Krub ExtraLight', sans-serif;
+    font-family: 'Krub ExtraLight', sans-serif;
     font-size: x-large;
 }
 
-.down_button_delete{
+.down_button_delete {
     border-radius: 10px;
     background-color: rgba(166, 46, 46, 1);
     color: white;
     border: none;
     text-align: center;
-
     width: 50%;
     height: 70px;
     margin-left: 25%;
-
-    font-family:  'Krub ExtraLight', sans-serif;
+    font-family: 'Krub ExtraLight', sans-serif;
     font-size: x-large;
 }
 
-.down_text_container{
-
+.down_text_container {
     margin-top: 2%;
     margin-left: 26%;
-
     display: flex;
     flex-direction: row;
     width: 52%;
     justify-content: space-around;
-
-    font-family:  'Krub ExtraLight', sans-serif;
+    font-family: 'Krub ExtraLight', sans-serif;
 }
 
-.label_checkbox{
+.label_checkbox {
     width: 80%;
     height: 20%;
     background-color: rgba(65, 76, 188, 1);
@@ -82,17 +73,14 @@
     border-radius: 10px;
 }
 
-.check_for_notifications_container{
+.check_for_notifications_container {
     margin-top: 2%;
     margin-left: 10%;
-
     display: flex;
     flex-direction: row;
     width: 75%;
     justify-content: space-around;
-
-    font-family:  'Krub ExtraLight', sans-serif;
-    
+    font-family: 'Krub ExtraLight', sans-serif;
 }
 
 .custom_checkbox {
@@ -100,34 +88,32 @@
     height: 30px;
 }
 
-.password_container{
-    font-family:  'Krub ExtraLight', sans-serif;
+.password_container {
+    font-family: 'Krub ExtraLight', sans-serif;
     color: rgba(255, 255, 255, 1);
-
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-around;
 }
 
-.hide_password_button{
+.hide_password_button {
     border: none; 
     background: none; 
     cursor: pointer;
     display: inline-block;
-
     width: 10%;
     height: 10%;
     margin-top: 7%;
     margin-right: 7%;
 }
 
-.password_icon{
+.password_icon {
     width: 30px;
     height: 30px;
 }
 
-.input_password{
+.input_password {
     border: 2px solid black;
     border-radius: 10px;
     outline: none;
@@ -136,16 +122,14 @@
     font-size: x-large;
     padding: 10px;
     display: inline-block;
-
     width: 72%;
     height: 70px;
     margin-left: 10%;
     margin-top: 2%;
-
-    font-family:  'Krub ExtraLight', sans-serif;
+    font-family: 'Krub ExtraLight', sans-serif;
 }
 
-.input_win{
+.input_win {
     border: 2px solid black;
     border-radius: 10px;
     outline: none;
@@ -153,13 +137,55 @@
     color: black;
     font-size: x-large;
     padding: 10px;
-
     width: 80%;
     height: 70px;
     margin-left: 10%;
     margin-top: 2%;
-
-    font-family:  'Krub ExtraLight', sans-serif;
+    font-family: 'Krub ExtraLight', sans-serif;
 }
 
+table {
+    width: 70%;
+    margin: auto;
+    border-collapse: collapse;
+    font-family: 'Krub ExtraLight', sans-serif;
+}
 
+td, th {
+    border-radius: 10px;
+    background-color: rgba(180, 187, 255, 1);
+    color: black;
+    font-size: x-large;
+    text-align: left;
+    font-family: 'Krub ExtraLight', sans-serif;
+    padding: 5px;
+}
+
+th {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+td:first-child, th:first-child {
+    padding-left: 10px;
+    padding-right: 0;
+    text-align: center;
+    width: 50px; 
+}
+
+td:nth-child(2), th:nth-child(2) {
+    padding-left: 10px;
+}
+
+.deleteSelectedButton{
+    border-radius: 10px;
+    background-color: rgba(166, 46, 46, 1);
+    color: white;
+    border: none;
+    text-align: center;
+    width: 35%;
+    height: 35px;
+    margin-left: 32%;
+    margin-top: 3%;
+    font-family: 'Krub ExtraLight', sans-serif;
+}
