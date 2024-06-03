@@ -77,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const portfelInput = document.getElementById('portfel');
     const stockErrorMessage = document.getElementById('stockErrorMessage');
     const portfelErrorMessage = document.getElementById('portfelErrorMessage');
-
     const validChars = /^[A-Z -]*$/; 
 
     function validateInput() {
@@ -218,3 +217,4 @@ document.addEventListener('DOMContentLoaded', function() {
         return re.test(email);
     }
 });
+
