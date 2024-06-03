@@ -91,7 +91,21 @@
                 <div style="margin-top: 3%; margin-left: max(12%, 80px);">
                     <div class="grafic" style="display: inline-block;"><img src={{url}} alt="Chart" height="99%" width="99%"></div>
                 </div>
-                <div style="margin-left: max(12%, 80px); overflow: auto; padding-left: 20px;" class="analysis"><img src={{url}} alt="Analysis" height="99%" width="99%"></div>
+                <div style="margin-left: max(12%, 80px); overflow: auto; padding-left: 20px;" class="analysis">
+                    {% if anomalies.any %}
+                        {% for _, anomaly in anomalies.iterrows() %}
+                            <div style="display: inline-block; padding: 10px; border-radius: 5px;">
+                                <strong>Date:</strong> {{ anomaly.Date }}<br>
+                                <strong>Time:</strong> {{ anomaly.Time }}<br>
+                                <strong>Border crossed:</strong> {{ anomaly.BorderCrossed }}<br>
+                                <strong>Difference from the previous price point:</strong> {{ anomaly.PriceDiff }}<br>
+                                <strong>Difference from the modeled price:</strong> {{ anomaly.ModeledPriceDiff }}<br>
+                                <strong>Cost at the moment of anomaly:</strong> {{ anomaly.Cost }}<br><br>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                
 
                 <div style="margin: auto;">
                     <h1 style="font-size: 100px;" class = "text_page2_4">crypto news</h1>

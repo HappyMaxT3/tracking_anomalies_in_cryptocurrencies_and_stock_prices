@@ -50,13 +50,17 @@ def send_password(email, password):
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
+    formatted_news = []
+    anomalies = []
+
     if request.method == 'POST':
         stock = request.form['stock']
         portfel = f"^{request.form['portfel']}"
         period_start = request.form['period_start']
         period_end = request.form['period_end']
+        
+        # Fetch news for the given stock
         news = yf.Ticker(stock).news
-        formatted_news = []
         for news_item in news:
             timestamp = int(news_item['providerPublishTime'])
             formatted_date = datetime.datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y %H:%M')
@@ -66,7 +70,11 @@ def index():
                 'link': news_item['link'],
                 'formatted_date': formatted_date
             })
-        algorithm.make_graph(stock, portfel, period_start, period_end)
+        
+        # Analyze anomalies
+        anomalies = algorithm.make_graph(stock, portfel, period_start, period_end)
+        
+        # Handle user session and monitored stocks
         if request.form.get('checkbox') == 'on':
             user_id = session.get('user_id')
             if user_id:
@@ -78,8 +86,9 @@ def index():
                 print("Updated monitored_stocks for user with id ", user_id)
             else:
                 return redirect(url_for("log_in_account"))
-        return render_template('index.html', url='/static/images/plot.png', news=formatted_news)
-    return render_template('index.html')
+
+    return render_template('index.html', url='/static/images/plot.png', news=formatted_news, anomalies=anomalies)
+
 
 @app.route("/login/", methods=['GET', 'POST'])
 def log_in_account():
