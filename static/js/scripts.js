@@ -194,7 +194,38 @@ function autocomplete(inp, arr) {
     });
 }
 
-const suggestions = ["AAPL", "ANTANANARIVU", "ALYASKA", "BIMBIMBAMBAMFIRST", "BIMBIMBAMBAMSECOND", "PIZDEC", "SUKA", "BLYAT"];
+const suggestions = [
+    "AAPL",
+    "AMZN",
+    "MSFT",
+    "GOOGL",
+    "TSLA",
+    "META",
+    "NVDA",
+    "PYPL",
+    "NFLX",
+    "INTC",
+    "CSCO",
+    "ADBE",
+    "QCOM",
+    "TXN",
+    "IBM",
+    "BTC-USD",
+    "ETH-USD",
+    "USDT-USD",
+    "BNB-USD",
+    "XRP-USD",
+    "ADA-USD",
+    "SOL-USD",
+    "DOGE-USD",
+    "DOT-USD",
+    "AVAX-USD",
+    "SHIB-USD",
+    "MATIC-USD",
+    "LTC-USD",
+    "LINK-USD",
+    "UNI-USD"
+  ];
 autocomplete(document.getElementById("stock"), suggestions);
 
 

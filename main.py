@@ -60,7 +60,10 @@ def index():
 
     if request.method == 'POST':
         stock = request.form['stock']
-        portfel = f"^{request.form['portfel']}"
+        if '-USD' in request.form['portfel']:
+            portfel = request.form['portfel']
+        else:
+            portfel = f"^{request.form['portfel']}"
         period_start = request.form['period_start']
         period_end = request.form['period_end']
         
