@@ -7,6 +7,10 @@ from src import algorithm, password_generator
 import json
 import yfinance as yf
 import datetime
+import os
+
+if os.path.exists('static/images/plot.png'):
+    os.remove('static/images/plot.png')
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'
