@@ -92,8 +92,7 @@ def make_graph(crypto, market_index, period_start, period_end):
         return anomalies_df
 
     except (ValueError, KeyError) as e:
-        # прокид ошибки фронту сюда
-        print(f"Error: {str(e)}. Please check the entered tickers and try again.")
+        raise RuntimeError(f"Error: {str(e)}")
 
 
 def detect_anomalies(crypto, market_index):

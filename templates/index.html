@@ -139,6 +139,14 @@
 
     </footer>
         
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var errorMessage = "{{ error_message }}";
+            if (errorMessage && errorMessage !== "None") {
+                alert(errorMessage);
+            }
+        });
+    </script>
 
     
 </body>

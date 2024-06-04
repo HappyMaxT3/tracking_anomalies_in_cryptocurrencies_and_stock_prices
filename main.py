@@ -52,6 +52,7 @@ def send_password(email, password):
 def index():
     formatted_news = []
     anomalies = []
+    error_message = None
 
     if request.method == 'POST':
         stock = request.form['stock']
@@ -59,7 +60,6 @@ def index():
         period_start = request.form['period_start']
         period_end = request.form['period_end']
         
-        # Fetch news for the given stock
         news = yf.Ticker(stock).news
         for news_item in news:
             timestamp = int(news_item['providerPublishTime'])
@@ -71,10 +71,11 @@ def index():
                 'formatted_date': formatted_date
             })
         
-        # Analyze anomalies
-        anomalies = algorithm.make_graph(stock, portfel, period_start, period_end)
+        try:
+            anomalies = algorithm.make_graph(stock, portfel, period_start, period_end)
+        except RuntimeError as e:
+            error_message = str(e)
         
-        # Handle user session and monitored stocks
         if request.form.get('checkbox') == 'on':
             user_id = session.get('user_id')
             if user_id:
@@ -87,7 +88,7 @@ def index():
             else:
                 return redirect(url_for("log_in_account"))
 
-    return render_template('index.html', url='/static/images/plot.png', news=formatted_news, anomalies=anomalies)
+    return render_template('index.html', url='/static/images/plot.png', news=formatted_news, anomalies=anomalies, error_message=error_message)
 
 
 @app.route("/login/", methods=['GET', 'POST'])
