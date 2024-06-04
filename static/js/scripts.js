@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
             portfelErrorMessage.parentElement.style.display = 'none';
         }
 
+        // проверка на акцию или крипту
         if (stockValue.includes('-USD')) {
             portfelInput.value = stockValue;
         }

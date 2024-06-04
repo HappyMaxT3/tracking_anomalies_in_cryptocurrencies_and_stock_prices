@@ -79,7 +79,10 @@ def index():
             })
         
         try:
-            anomalies = algorithm.make_graph(stock, portfel, period_start, period_end)
+            if "-USD" in stock:
+                anomalies = algorithm.make_crypto_graph(stock, period_start, period_end)
+            else:
+                anomalies = algorithm.make_graph(stock, portfel, period_start, period_end)
         except RuntimeError as e:
             error_message = str(e)
         
