@@ -68,18 +68,18 @@
                 <form method="post" id="validNames">
                     <div style="margin-left: 5%;" class="feild_container">
                         <div class="autocomplete" style="display: inline-block;">
-                            <input placeholder="stock" id="stock" name="stock" class="feild1" required/>
+                            <input placeholder="ticker" id="stock" name="stock" class="feild1" required/>
                             <div id="stock-dropdown" class="autocomplete-dropdown"></div>
                         </div>
                         <label class="error-message"><span id="stockErrorMessage"></span></label>
                         <div class="autocomplete" style="display: inline-block; margin-left: 2%;">
-                            <input placeholder="portfel" id="portfel" name="portfel" class="feild2-3" required/>
+                            <input placeholder="portfel(only for stock)" id="portfel" name="portfel" class="feild2-3" required/>
                             <div id="portfel-dropdown" class="autocomplete-dropdown"></div>
                         </div>
                         <label class="error-message"><span id="portfelErrorMessage"></span></label>
-                        <input placeholder="DD-MM-YYYY" type="text" id="datepicker1" class="feild_period_start" style="margin-left: 2%; display: inline-block;" name="period_start">
-                        <input placeholder="DD-MM-YYYY" type="text" id="datepicker2" class="feild_period_end" style="margin-left: 5px; display: inline-block;" name="period_end">
-                        <input type="submit" value="Start" class="start_button" style="margin-left: 2%; display: inline-block;"/>
+                        <input placeholder="Date start (DD-MM-YYYY)" type="text" id="datepicker1" class="feild_period_start" style="margin-left: 2%; display: inline-block;" name="period_start">
+                        <input placeholder="Date end (DD-MM-YYYY)" type="text" id="datepicker2" class="feild_period_end" style="margin-left: 5px; display: inline-block;" name="period_end">
+                        <input type="submit" value="Start" class="start_button" style="margin-left: 2%; display: inline-block; text-align:center;"/>
                     </div>
                     <div class="check_for_notifications_container">
                         <input type="checkbox" name="checkbox" class="custom_checkbox"></input>
@@ -89,8 +89,20 @@
                 <div style="margin-top: 3%; margin-left: max(12%, 80px);">
                     <div class="grafic" style="display: inline-block;"><img src={{url}} alt="Chart" height="100%" width="100%"></div>
                 </div>
-                <div style="margin-left: max(12%, 80px); overflow: auto; padding-left: 20px;" class="analysis"><img src="" alt="Analysis" height="99%" width="99%"></div>
-
+                <div style="margin-left: max(12%, 80px); overflow: auto; padding-left: 20px;" class="analysis">
+                    {% if anomalies.any %}
+                        {% for _, anomaly in anomalies.iterrows() %}
+                            <div style="display: inline-block; padding: 10px; border-radius: 5px;">
+                                <strong>Date:</strong> {{ anomaly.Date }}<br>
+                                <strong>Time:</strong> {{ anomaly.Time }}<br>
+                                <strong>Border crossed:</strong> {{ anomaly.BorderCrossed }}<br>
+                                <strong>Difference from the previous price point:</strong> {{ anomaly.PriceDiff }}<br>
+                                <strong>Difference from the modeled price:</strong> {{ anomaly.ModeledPriceDiff }}<br>
+                                <strong>Cost at the moment of anomaly:</strong> {{ anomaly.Cost }}<br><br>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
                 <div style="margin: auto;">
                     <h1 style="font-size: 100px;" class="text_page2_4">crypto news</h1>
                     <div style="margin-left: max(12%, 80px); overflow: auto; padding-left: 20px;" class="news" style="display: inline-block; padding: 10px; border-radius: 5px;">
@@ -117,5 +129,13 @@
             <a class="footer_text" style="margin-top: -1%;" href="https://www.notion.so/tracking_anomalies_Documentation-78953125875241acb81914fafe0ed89f?pvs=4">You can read documentation here</a>
         </div>
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var errorMessage = "{{ error_message }}";
+            if (errorMessage && errorMessage !== "None") {
+                alert(errorMessage);
+            }
+        });
+    </script>
 </body>
 </html>

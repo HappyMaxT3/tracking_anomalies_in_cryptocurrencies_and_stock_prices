@@ -7,6 +7,10 @@ from src import algorithm, password_generator
 import json
 import yfinance as yf
 import datetime
+import os
+
+if os.path.exists('static/images/plot.png'):
+    os.remove('static/images/plot.png')
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'
@@ -31,12 +35,14 @@ with app.app_context():
     db.create_all()
     
 def fetch_and_detect_anomalies():
-    print('----------------------- Background task executed -----------------------')
     users = User.query.all()
     for user in users:
         for i in user.monitored_stocks:
             stock, portfel = i.split(',')
-            type_of_anomaly = algorithm.detect_anomalies(stock, portfel)
+            if '-USD' in portfel:
+                type_of_anomaly = algorithm.detect_crypto_anomalies(stock)
+            else:
+                type_of_anomaly = algorithm.detect_anomalies(stock, portfel)
             if type_of_anomaly in ['fallen', 'increased']:
                 msg = Message('Anomaly detected', sender='trackinganomalies@gmail.com', recipients=user.email)
                 msg.body = f'Anomaly was detected in {stock}. The share price has {type_of_anomaly}.'
@@ -50,13 +56,20 @@ def send_password(email, password):
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
+    formatted_news = []
+    anomalies = []
+    error_message = None
+
     if request.method == 'POST':
         stock = request.form['stock']
-        portfel = f"^{request.form['portfel']}"
+        if '-USD' in request.form['portfel']:
+            portfel = request.form['portfel']
+        else:
+            portfel = f"^{request.form['portfel']}"
         period_start = request.form['period_start']
         period_end = request.form['period_end']
+        
         news = yf.Ticker(stock).news
-        formatted_news = []
         for news_item in news:
             timestamp = int(news_item['providerPublishTime'])
             formatted_date = datetime.datetime.fromtimestamp(timestamp).strftime('%d/%m/%Y %H:%M')
@@ -66,7 +79,15 @@ def index():
                 'link': news_item['link'],
                 'formatted_date': formatted_date
             })
-        algorithm.make_graph(stock, portfel, period_start, period_end)
+        
+        try:
+            if "-USD" in stock:
+                anomalies = algorithm.make_crypto_graph(stock, period_start, period_end)
+            else:
+                anomalies = algorithm.make_graph(stock, portfel, period_start, period_end)
+        except RuntimeError as e:
+            error_message = str(e)
+        
         if request.form.get('checkbox') == 'on':
             user_id = session.get('user_id')
             if user_id:
@@ -78,8 +99,9 @@ def index():
                 print("Updated monitored_stocks for user with id ", user_id)
             else:
                 return redirect(url_for("log_in_account"))
-        return render_template('index.html', url='/static/images/plot.png', news=formatted_news)
-    return render_template('index.html')
+
+    return render_template('index.html', url='/static/images/plot.png', news=formatted_news, anomalies=anomalies, error_message=error_message)
+
 
 @app.route("/login/", methods=['GET', 'POST'])
 def log_in_account():
@@ -126,7 +148,7 @@ def scheduled_fetch_data():
     with app.app_context():
         fetch_and_detect_anomalies()
 
-# scheduler.add_job(func=scheduled_fetch_data, trigger='interval', seconds=15, id='fetch_data_job')
+#scheduler.add_job(func=scheduled_fetch_data, trigger='interval', hours=6, id='fetch_data_job')
 #scheduler.start()
 
 if __name__ == '__main__':

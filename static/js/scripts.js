@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
             portfelErrorMessage.parentElement.style.display = 'none';
         }
 
+        // проверка на акцию или крипту
         if (stockValue.includes('-USD')) {
             portfelInput.value = stockValue;
         }
@@ -164,7 +165,39 @@ document.addEventListener('DOMContentLoaded', function() {
     stockInput.addEventListener('focus', function() {
         showDropdown(stockDropdown, stockOptions);
     });
-
+const suggestions = [
+    "AAPL",
+    "AMZN",
+    "MSFT",
+    "GOOGL",
+    "TSLA",
+    "META",
+    "NVDA",
+    "PYPL",
+    "NFLX",
+    "INTC",
+    "CSCO",
+    "ADBE",
+    "QCOM",
+    "TXN",
+    "IBM",
+    "BTC-USD",
+    "ETH-USD",
+    "USDT-USD",
+    "BNB-USD",
+    "XRP-USD",
+    "ADA-USD",
+    "SOL-USD",
+    "DOGE-USD",
+    "DOT-USD",
+    "AVAX-USD",
+    "SHIB-USD",
+    "MATIC-USD",
+    "LTC-USD",
+    "LINK-USD",
+    "UNI-USD"
+  ];
+autocomplete(document.getElementById("stock"), suggestions);
     stockInput.addEventListener('input', function() {
         const filteredOptions = filterOptions(stockOptions, stockInput.value);
         showDropdown(stockDropdown, filteredOptions);
