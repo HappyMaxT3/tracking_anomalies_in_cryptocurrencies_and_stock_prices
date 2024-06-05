@@ -294,23 +294,6 @@ def detect_crypto_anomalies(crypto):
             lower_bound_multiplier -= 0.1
             upper_bound_multiplier -= 0.1
 
-    # Создание и заполнение датафрейма для информации об аномалиях
-    anomalies_df = pd.DataFrame(columns=['Date', 'Time', 'Cost', 'PriceDiff', 'BorderCrossed', 'ModeledPriceDiff'])
-    last_price = None
-    for idx, value in crypto_data['Close'][below_lower_bound].items():
-        date = idx.strftime('%Y-%m-%d')
-        time = idx.strftime('%H:%M')
-        cost = value
-        if last_price is not None:
-            price_diff = cost - last_price
-        else:
-            price_diff = 0
-        modeled_price_diff = cost - ema[idx]
-        anomalies_df = pd.concat([anomalies_df, pd.DataFrame(
-            {'Date': [date], 'Time': [time], 'Cost': [cost], 'PriceDiff': [price_diff], 'BorderCrossed': ['Lower'],
-             'ModeledPriceDiff': [modeled_price_diff]})], ignore_index=True)
-        last_price = cost
-
     last_price = None
     for idx, value in crypto_data['Close'][above_upper_bound].items():
         date = idx.strftime('%Y-%m-%d')
