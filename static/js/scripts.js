@@ -6,7 +6,6 @@ document.getElementById('scrollButton').addEventListener('click', function() {
     target.scrollIntoView({ behavior: 'smooth' });
 });
 
-
 //calendars
 $(function() {
     // Инициализация Datepicker
@@ -47,7 +46,6 @@ $(function() {
         selectedDateEnd = $(this).val();
     });
 });
-
 
 //correct input check
 document.addEventListener('DOMContentLoaded', function() {
@@ -98,81 +96,93 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!validateInput()) {
             event.preventDefault();
         }
-    }); 
+    });
+
+    // Autocomplete functionality
+    const stockDropdown = document.getElementById('stock-dropdown');
+    const portfelDropdown = document.getElementById('portfel-dropdown');
+    const stockOptions = [    
+    "GSPC",
+    "BTC-USD",
+    "ETH-USD",
+    "USDT-USD",
+    "BNB-USD",
+    "XRP-USD",
+    "ADA-USD",
+    "SOL-USD",
+    "DOGE-USD",
+    "DOT-USD",
+    "AVAX-USD",
+    "SHIB-USD",
+    "MATIC-USD",
+    "LTC-USD",
+    "LINK-USD",
+    "UNI-USD"
+];
+    const portfelOptions = [    
+    "GSPC",
+    "BTC-USD",
+    "ETH-USD",
+    "USDT-USD",
+    "BNB-USD",
+    "XRP-USD",
+    "ADA-USD",
+    "SOL-USD",
+    "DOGE-USD",
+    "DOT-USD",
+    "AVAX-USD",
+    "SHIB-USD",
+    "MATIC-USD",
+    "LTC-USD",
+    "LINK-USD",
+    "UNI-USD"
+];
+
+    function filterOptions(options, query) {
+        return options.filter(option => option.toLowerCase().includes(query.toLowerCase()));
+    }
+
+    function showDropdown(dropdown, options) {
+        dropdown.innerHTML = '';
+        options.forEach(option => {
+            const optionElement = document.createElement('div');
+            optionElement.className = 'autocomplete-option';
+            optionElement.textContent = option;
+            optionElement.addEventListener('click', function() {
+                if (dropdown.id === 'stock-dropdown') {
+                    stockInput.value = option;
+                } else {
+                    portfelInput.value = option;
+                }
+                dropdown.innerHTML = '';
+            });
+            dropdown.appendChild(optionElement);
+        });
+        dropdown.style.display = 'block';
+    }
+
+    stockInput.addEventListener('focus', function() {
+        showDropdown(stockDropdown, stockOptions);
+    });
+
+    stockInput.addEventListener('input', function() {
+        const filteredOptions = filterOptions(stockOptions, stockInput.value);
+        showDropdown(stockDropdown, filteredOptions);
+    });
+
+    portfelInput.addEventListener('focus', function() {
+        showDropdown(portfelDropdown, portfelOptions);
+    });
+
+    portfelInput.addEventListener('input', function() {
+        const filteredOptions = filterOptions(portfelOptions, portfelInput.value);
+        showDropdown(portfelDropdown, filteredOptions);
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.autocomplete')) {
+            stockDropdown.style.display = 'none';
+            portfelDropdown.style.display = 'none';
+        }
+    });
 });
-
-
-//autocomplete
-function autocomplete(inp, arr) {
-    let currentFocus;
-    inp.addEventListener("input", function(e) {
-        let a, b, i, val = this.value;
-        closeAllLists();
-        if (!val) { return false; }
-        currentFocus = -1;
-        a = document.createElement("DIV");
-        a.setAttribute("id", this.id + "autocomplete-list");
-        a.setAttribute("class", "autocomplete-items");
-        this.parentNode.appendChild(a);
-        for (i = 0; i < arr.length; i++) {
-            if (arr[i].substr(0, val.length).toUpperCase() === val.toUpperCase()) {
-                b = document.createElement("DIV");
-                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-                b.innerHTML += arr[i].substr(val.length);
-                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-                b.addEventListener("click", function(e) {
-                    inp.value = this.getElementsByTagName("input")[0].value;
-                    closeAllLists();
-                });
-                a.appendChild(b);
-            }
-        }
-    });
-
-    inp.addEventListener("keydown", function(e) {
-        let x = document.getElementById(this.id + "autocomplete-list");
-        if (x) x = x.getElementsByTagName("div");
-        if (e.keyCode == 40) {
-            currentFocus++;
-            addActive(x);
-        } else if (e.keyCode == 38) {
-            currentFocus--;
-            addActive(x);
-        } else if (e.keyCode == 13) {
-            e.preventDefault();
-            if (currentFocus > -1) {
-                if (x) x[currentFocus].click();
-            }
-        }
-    });
-
-    function addActive(x) {
-        if (!x) return false;
-        removeActive(x);
-        if (currentFocus >= x.length) currentFocus = 0;
-        if (currentFocus < 0) currentFocus = (x.length - 1);
-        x[currentFocus].classList.add("autocomplete-active");
-    }
-
-    function removeActive(x) {
-        for (let i = 0; i < x.length; i++) {
-            x[i].classList.remove("autocomplete-active");
-        }
-    }
-
-    function closeAllLists(elmnt) {
-        let x = document.getElementsByClassName("autocomplete-items");
-        for (let i = 0; i < x.length; i++) {
-            if (elmnt != x[i] && elmnt != inp) {
-                x[i].parentNode.removeChild(x[i]);
-            }
-        }
-    }
-
-    document.addEventListener("click", function (e) {
-        closeAllLists(e.target);
-    });
-}
-
-const suggestions = ["AAPL", "ANTANANARIVU", "ALYASKA", "AAAAAAAAA", "AAAAA", "AAAAAPIZZZDDAAAA", "BIMBIMBAMBAMFIRST", "BIMBIMBAMBAMSECOND", "PIZDEC", "SUKA", "BLYAT"];
-autocomplete(document.getElementById("stock"), suggestions);
