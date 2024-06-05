@@ -11,6 +11,7 @@ def make_graph(crypto, market_index, period_start, period_end):
         start_date = datetime.strptime(period_start, "%d-%m-%Y")
         start_date = start_date.strftime('%Y-%m-%d')
         end_date = datetime.strptime(period_end, "%d-%m-%Y")
+        end_date = end_date + timedelta(days=1)
         end_date = end_date.strftime('%Y-%m-%d')
 
         # Запрос данных по криптовалюте и индексу рынка из API на заданном отрезке времени
@@ -101,6 +102,7 @@ def make_crypto_graph(crypto, period_start, period_end):
         start_date = datetime.strptime(period_start, "%d-%m-%Y")
         start_date = start_date.strftime('%Y-%m-%d')
         end_date = datetime.strptime(period_end, "%d-%m-%Y")
+        end_date = end_date + timedelta(days=1)
         end_date = end_date.strftime('%Y-%m-%d')
 
         # Запрос данных по криптовалюте и индексу рынка из API на заданном отрезке времени

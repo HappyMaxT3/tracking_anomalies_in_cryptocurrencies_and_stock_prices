@@ -139,7 +139,6 @@ def create_account():
         password = password_generator.generate()
         new_user = User(email=email_adress, password=password, monitored_stocks=[])
         send_password(email_adress, password)
-        print(email_adress, password)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for("log_in_account"))
