@@ -73,14 +73,14 @@
                 <form method="post" id="validNames">
                     <div style="margin-left: 5%;" class="feild_container">
                         <div class="autocomplete" style="display: inline-block;">
-                            <input placeholder="stock" id="stock" name="stock" class="feild1" required/>
+                            <input placeholder="ticker" id="stock" name="stock" class="feild1" required/>
                         </div>
                         <label class="error-message"><span id="stockErrorMessage"></span></label>
-                        <input placeholder="portfel" id="portfel" name="portfel" class="feild2-3" style="margin-left: 2%; display: inline-block;" required/>
+                        <input placeholder="portfel(only for stock)" id="portfel" name="portfel" class="feild2-3" style="margin-left: 2%; display: inline-block;" required/>
                         <label class="error-message"><span id="portfelErrorMessage"></span></label>
-                        <input placeholder="DD-MM-YYYY" type="text" id="datepicker1" class="feild_period_start" style="margin-left: 2%; display: inline-block;" name="period_start">
-                        <input placeholder="DD-MM-YYYY" type="text" id="datepicker2" class="feild_period_end" style="margin-left: 5px; display: inline-block;" name="period_end">
-                        <input type="submit" value="Start" class="start_button" style="margin-left: 2%; display: inline-block;"/>
+                        <input placeholder="Date start (DD-MM-YYYY)" type="text" id="datepicker1" class="feild_period_start" style="margin-left: 2%; display: inline-block;" name="period_start">
+                        <input placeholder="Date end (DD-MM-YYYY)" type="text" id="datepicker2" class="feild_period_end" style="margin-left: 5px; display: inline-block;" name="period_end">
+                        <input type="submit" value="Start" class="start_button" style="margin-left: 2%; display: inline-block; text-align:center;"/>
                     </div>
                     <div class="check_for_notifications_container">
                         <input type="checkbox" name="checkbox" class="custom_checkbox"></input>

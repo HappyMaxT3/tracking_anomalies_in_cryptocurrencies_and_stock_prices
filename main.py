@@ -35,12 +35,14 @@ with app.app_context():
     db.create_all()
     
 def fetch_and_detect_anomalies():
-    print('----------------------- Background task executed -----------------------')
     users = User.query.all()
     for user in users:
         for i in user.monitored_stocks:
             stock, portfel = i.split(',')
-            type_of_anomaly = algorithm.detect_anomalies(stock, portfel)
+            if '-USD' in portfel:
+                type_of_anomaly = algorithm.detect_crypto_anomalies(stock)
+            else:
+                type_of_anomaly = algorithm.detect_anomalies(stock, portfel)
             if type_of_anomaly in ['fallen', 'increased']:
                 msg = Message('Anomaly detected', sender='trackinganomalies@gmail.com', recipients=user.email)
                 msg.body = f'Anomaly was detected in {stock}. The share price has {type_of_anomaly}.'
@@ -146,7 +148,7 @@ def scheduled_fetch_data():
     with app.app_context():
         fetch_and_detect_anomalies()
 
-# scheduler.add_job(func=scheduled_fetch_data, trigger='interval', seconds=15, id='fetch_data_job')
+#scheduler.add_job(func=scheduled_fetch_data, trigger='interval', hours=6, id='fetch_data_job')
 #scheduler.start()
 
 if __name__ == '__main__':

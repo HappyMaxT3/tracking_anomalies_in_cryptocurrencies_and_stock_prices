@@ -240,3 +240,96 @@ def detect_anomalies(crypto, market_index):
         anomalies_today = "increased"
 
     return anomalies_today
+
+
+def detect_crypto_anomalies(crypto):
+    # Определение диапазона времени для исследования
+    start_date = (datetime.now() - timedelta(weeks=1)).strftime('%Y-%m-%d')
+    end_date = datetime.now().strftime('%Y-%m-%d')
+
+    # Запрос данных по криптовалюте и индексу рынка из API на заданном отрезке времени
+    crypto_data = yf.download(crypto, start=start_date, end=end_date, interval='30m')
+
+    # Проверка наличия данных
+    if crypto_data.empty:
+        raise ValueError("No data available for the specified ticker.")
+
+    # Вычисление модели цены методом EMA
+    window_size = 20
+    ema = crypto_data['Close'].ewm(span=window_size, adjust=False).mean()
+
+    # Вычисление остатков и скользящего стандартного отклонения остатков
+    residuals = crypto_data['Close'] - ema
+    rolling_std_residuals = residuals.rolling(window=window_size, min_periods=1).std()
+
+    # Инициализация множителей чувствительности
+    lower_bound_multiplier = 1.5
+    upper_bound_multiplier = 1.5
+
+    # Функция для вычисления аномалий
+    def calculate_anomalies(lower_bound_multiplier, upper_bound_multiplier):
+        lower_bound = ema - lower_bound_multiplier * rolling_std_residuals
+        upper_bound = ema + upper_bound_multiplier * rolling_std_residuals
+        below_lower_bound = crypto_data['Close'] < lower_bound
+        above_upper_bound = crypto_data['Close'] > upper_bound
+        return below_lower_bound, above_upper_bound
+
+    # Настройка чувствительности на основе количества аномалий
+    target_anomalies = 0.05 * len(crypto_data)  # Целевое значение 5% точек данных как аномалии
+    tolerance = 0.01 * len(crypto_data)  # Допустимое отклонение от целевого значения
+
+    for _ in range(10):
+        below_lower_bound, above_upper_bound = calculate_anomalies(lower_bound_multiplier, upper_bound_multiplier)
+        total_anomalies = below_lower_bound.sum() + above_upper_bound.sum()
+
+        if abs(total_anomalies - target_anomalies) <= tolerance:
+            break  # Чувствительность в пределах допустимого диапазона
+
+        if total_anomalies > target_anomalies:
+            lower_bound_multiplier += 0.1
+            upper_bound_multiplier += 0.1
+        else:
+            lower_bound_multiplier -= 0.1
+            upper_bound_multiplier -= 0.1
+
+    # Создание и заполнение датафрейма для информации об аномалиях
+    anomalies_df = pd.DataFrame(columns=['Date', 'Time', 'Cost', 'PriceDiff', 'BorderCrossed', 'ModeledPriceDiff'])
+    last_price = None
+    for idx, value in crypto_data['Close'][below_lower_bound].items():
+        date = idx.strftime('%Y-%m-%d')
+        time = idx.strftime('%H:%M')
+        cost = value
+        if last_price is not None:
+            price_diff = cost - last_price
+        else:
+            price_diff = 0
+        modeled_price_diff = cost - ema[idx]
+        anomalies_df = pd.concat([anomalies_df, pd.DataFrame(
+            {'Date': [date], 'Time': [time], 'Cost': [cost], 'PriceDiff': [price_diff], 'BorderCrossed': ['Lower'],
+             'ModeledPriceDiff': [modeled_price_diff]})], ignore_index=True)
+        last_price = cost
+
+    last_price = None
+    for idx, value in crypto_data['Close'][above_upper_bound].items():
+        date = idx.strftime('%Y-%m-%d')
+        time = idx.strftime('%H:%M')
+        cost = value
+        if last_price is not None:
+            price_diff = cost - last_price
+        else:
+            price_diff = 0
+        modeled_price_diff = cost - ema[idx]
+        anomalies_df = pd.concat([anomalies_df, pd.DataFrame(
+            {'Date': [date], 'Time': [time], 'Cost': [cost], 'PriceDiff': [price_diff], 'BorderCrossed': ['Upper'],
+             'ModeledPriceDiff': [modeled_price_diff]})], ignore_index=True)
+        last_price = cost
+
+    # Проверка, была ли аномалия сегодня
+    today = datetime.now().strftime('%Y-%m-%d')
+    anomalies_today = None
+    if (crypto_data.index.date == today) & below_lower_bound.any():
+        anomalies_today = "fallen"
+    elif (crypto_data.index.date == today) & above_upper_bound.any():
+        anomalies_today = "increased"
+
+    return anomalies_today
