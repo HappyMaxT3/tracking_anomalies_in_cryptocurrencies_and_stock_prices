@@ -8,7 +8,7 @@ import json
 import yfinance as yf
 import datetime
 import os
-
+from dotenv import load_dotenv
 if os.path.exists('static/images/plot.png'):
     os.remove('static/images/plot.png')
 
@@ -18,11 +18,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///anomaly_detection.db'
 db = SQLAlchemy(app)
 scheduler = BackgroundScheduler()
 
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'trackinganomalies@gmail.com'
-app.config['MAIL_PASSWORD'] = 'kvcn thxh zmim cmol'
+load_dotenv()
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS')
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 mail = Mail(app)
 
 class User(db.Model):
@@ -134,7 +135,7 @@ def profile():
 @app.route("/create_account/", methods=['GET', 'POST'])
 def create_account():
     if request.method == 'POST':
-        email_adress = request.form['email_adress']
+        email_adress = request.form['email']
         password = password_generator.generate()
         new_user = User(email=email_adress, password=password, monitored_stocks=[])
         send_password(email_adress, password)
