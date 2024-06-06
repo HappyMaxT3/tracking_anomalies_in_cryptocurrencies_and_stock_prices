@@ -96,13 +96,12 @@ def index():
             if user_id:
                 user = User.query.get(user_id)
                 monitored_stocks = json.loads(user.monitored_stocks) if user.monitored_stocks else []
-                monitored_stocks.append({'stock': stock, 'portfel': portfel})
-                user.monitored_stocks = json.dumps(monitored_stocks)
-                db.session.commit()
-                print("Updated monitored_stocks for user with id ", user_id)
+                if {'stock': stock, 'portfel': portfel} not in monitored_stocks:
+                    monitored_stocks.append({'stock': stock, 'portfel': portfel})
+                    user.monitored_stocks = json.dumps(monitored_stocks)
+                    db.session.commit()
             else:
                 return redirect(url_for("log_in_account"))
-
     return render_template('index.html', url='/static/images/plot.png', news=formatted_news, anomalies=anomalies, error_message=error_message)
 
 
@@ -172,7 +171,7 @@ def scheduled_fetch_data():
     with app.app_context():
         fetch_and_detect_anomalies()
 
-# scheduler.add_job(func=scheduled_fetch_data, trigger='interval', hours=6, id='fetch_data_job')
-# scheduler.start()
+scheduler.add_job(func=scheduled_fetch_data, trigger='interval', hours=6, id='fetch_data_job')
+scheduler.start()
 if __name__ == '__main__':
     app.run(debug=True)

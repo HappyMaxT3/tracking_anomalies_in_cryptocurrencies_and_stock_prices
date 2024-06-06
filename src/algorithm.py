@@ -9,9 +9,13 @@ def make_graph(crypto, market_index, period_start, period_end):
     try:
         # Определение диапазона времени для исследования
         start_date = datetime.strptime(period_start, "%d-%m-%Y")
-        start_date = start_date.strftime('%Y-%m-%d')
         end_date = datetime.strptime(period_end, "%d-%m-%Y")
         end_date = end_date + timedelta(days=1)
+
+        if (end_date - start_date).days > 30:
+            raise ValueError("Your period is too long. It should be less than 30 days.")
+
+        start_date = start_date.strftime('%Y-%m-%d')
         end_date = end_date.strftime('%Y-%m-%d')
 
         # Запрос данных по криптовалюте и индексу рынка из API на заданном отрезке времени
@@ -110,9 +114,13 @@ def make_crypto_graph(crypto, period_start, period_end):
     try:
         # Определение диапазона времени для исследования
         start_date = datetime.strptime(period_start, "%d-%m-%Y")
-        start_date = start_date.strftime('%Y-%m-%d')
         end_date = datetime.strptime(period_end, "%d-%m-%Y")
         end_date = end_date + timedelta(days=1)
+
+        if (end_date - start_date).days > 30:
+            raise ValueError("Your period is too long. It should be less than 30 days.")
+
+        start_date = start_date.strftime('%Y-%m-%d')
         end_date = end_date.strftime('%Y-%m-%d')
 
         # Запрос данных по криптовалюте и индексу рынка из API на заданном отрезке времени
