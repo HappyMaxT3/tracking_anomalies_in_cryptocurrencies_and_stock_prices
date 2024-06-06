@@ -80,7 +80,6 @@ You will receive:<br>
 
 3) News summary for a given cryptocurrency</div>
                     <div class="guide_boxes">Subscribe to notifications<br>
-
 If you want to receive notifications about anomalies in real time, you need to create an account. To do this, click on the profile button to the login page, and from there to the registration page. After you enter your email, a password will be sent to it. Using it, log into your account. To subscribe to notifications, you should tick the "I want to receive notifications about changes" option when entering information on the main page. If you want to unsubscribe from any of the stocks or cryptocurrencies, you can do this in your profile. Also there you can log out of your account or delete it.<br><br></div>
                 </div>
             </div>
@@ -124,20 +123,20 @@ If you want to receive notifications about anomalies in real time, you need to c
                 <div style="margin-top: 3%; margin-left: max(12%, 80px);">
                     <div class="grafic" style="display: inline-block;"><img src={{url}} alt="Chart" height="100%" width="100%"></div>
                 </div>
-                <div style="margin-left: max(12%, 80px); overflow: auto; padding-left: 20px;" class="analysis">
+                <textarea style="margin-left: max(12%, 80px); overflow: auto; padding-left: 20px;" class="analysis" readonly>
                     {% if anomalies.any %}
                         {% for _, anomaly in anomalies.iterrows() %}
-                            <div style="display: inline-block; padding: 10px; border-radius: 5px;">
-                                <strong>Date:</strong> {{ anomaly.Date }}<br>
-                                <strong>Time:</strong> {{ anomaly.Time }}<br>
-                                <strong>Border crossed:</strong> {{ anomaly.BorderCrossed }}<br>
-                                <strong>Difference from the previous price point:</strong> {{ anomaly.PriceDiff }}<br>
-                                <strong>Difference from the modeled price:</strong> {{ anomaly.ModeledPriceDiff }}<br>
-                                <strong>Cost at the moment of anomaly:</strong> {{ anomaly.Cost }}<br><br>
-                            </div>
+                            
+                                Date: {{ anomaly.Date }}
+                                Time: {{ anomaly.Time }}
+                                Border crossed: {{ anomaly.BorderCrossed }}
+                                Difference from the previous price point: {{ anomaly.PriceDiff }}
+                                Difference from the modeled price: {{ anomaly.ModeledPriceDiff }}
+                                Cost at the moment of anomaly: {{ anomaly.Cost }}
+                            
                         {% endfor %}
                     {% endif %}
-                </div>
+                </textarea>
                 <div style="margin: auto;">
                     <h1 style="font-size: 100px;" class="text_page2_4">crypto news</h1>
                     <div style="margin-left: max(12%, 80px); overflow: auto; padding-left: 20px;" class="news" style="display: inline-block; padding: 10px; border-radius: 5px;">
