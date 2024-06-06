@@ -135,30 +135,15 @@ document.addEventListener('DOMContentLoaded', function() {
         "UNI-USD"
       ];
     const portfelOptions = [    
-    "GSPC",
-    "DJI",
-    "IXIC",
-    "FTSE",
-    "GDAXI",
-    "FCHI",
-    "HSI",
-    "BSESN",
-    "BTC-USD",
-    "ETH-USD",
-    "USDT-USD",
-    "BNB-USD",
-    "XRP-USD",
-    "ADA-USD",
-    "SOL-USD",
-    "DOGE-USD",
-    "DOT-USD",
-    "AVAX-USD",
-    "SHIB-USD",
-    "MATIC-USD",
-    "LTC-USD",
-    "LINK-USD",
-    "UNI-USD"
-];
+        "GSPC",
+        "DJI",
+        "IXIC",
+        "FTSE",
+        "GDAXI",
+        "FCHI",
+        "HSI",
+        "BSESN"
+    ];
 
     function filterOptions(options, query) {
         return options.filter(option => option.toLowerCase().includes(query.toLowerCase()));
