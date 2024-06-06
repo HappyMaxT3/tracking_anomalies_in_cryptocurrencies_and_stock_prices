@@ -42,9 +42,13 @@ def make_graph(crypto, market_index, period_start, period_end):
 
         # Построение графиков текущей и предполагаемой цены
         matplotlib.use('Agg')
-        plt.figure(figsize=(15, 6))
-        plt.plot(crypto_data.index, crypto_data['Close'], color="green", label='Actual price')
-        plt.plot(crypto_data.index, model.fittedvalues, color="green", linestyle=":", label='Modelled price')
+        fig = plt.figure(figsize=(15, 6))
+        fig.patch.set_facecolor("#0d1245")
+        ax = plt.axes()
+        ax.set_facecolor("#0d1245")
+
+        plt.plot(crypto_data.index, crypto_data['Close'], color="#CCFFFF", label='Actual price')
+        plt.plot(crypto_data.index, model.fittedvalues, color="#CCFFFF", linestyle=":", label='Modelled price')
 
         # Нахождение аномалий
         below_lower_bound = crypto_data['Close'] < lower_bound
@@ -79,14 +83,20 @@ def make_graph(crypto, market_index, period_start, period_end):
             last_price = cost
 
         # Построение аномалий под нижней границей
-        plt.scatter(crypto_data.index[below_lower_bound], crypto_data['Close'][below_lower_bound], color='red', label='Anomalies below the lower border')
+        plt.scatter(crypto_data.index[below_lower_bound], crypto_data['Close'][below_lower_bound], color='#FFFF00', label='Anomalies below the lower border')
 
         # Построение аномалий над верхней границей
-        plt.scatter(crypto_data.index[above_upper_bound], crypto_data['Close'][above_upper_bound], color='blue', label='Anomalies above the upper border')
+        plt.scatter(crypto_data.index[above_upper_bound], crypto_data['Close'][above_upper_bound], color='#FF00FF', label='Anomalies above the upper border')
 
-        plt.xlabel('Date')
-        plt.ylabel('Price')
-        plt.legend()
+        plt.xlabel('Date', color="white")
+        plt.ylabel('Price', color="white")
+        plt.tick_params(axis="x", colors="white")
+        plt.tick_params(axis="y", colors="white")
+        plt.gca().spines['top'].set_color('white')
+        plt.gca().spines['bottom'].set_color('white')
+        plt.gca().spines['left'].set_color('white')
+        plt.gca().spines['right'].set_color('white')
+        plt.legend(facecolor="#0d1245", labelcolor="white")
 
         plt.savefig('static/images/plot.png')
 
@@ -152,9 +162,12 @@ def make_crypto_graph(crypto, period_start, period_end):
 
         # Построение графиков текущей и предполагаемой цены
         matplotlib.use('Agg')
-        plt.figure(figsize=(15, 6))
-        plt.plot(crypto_data.index, crypto_data['Close'], color="green", label='Actual price')
-        plt.plot(crypto_data.index, ema, color="green", linestyle=":", label='Modeled price')
+        fig = plt.figure(figsize=(15, 6))
+        fig.patch.set_facecolor("#0d1245")
+        ax = plt.axes()
+        ax.set_facecolor("#0d1245")
+        plt.plot(crypto_data.index, crypto_data['Close'], color="#CCFFFF", label='Actual price')
+        plt.plot(crypto_data.index, ema, color="#CCFFFF", linestyle=":", label='Modeled price')
 
         # Создание и заполнение датафрейма для информации об аномалиях
         anomalies_df = pd.DataFrame(columns=['Date', 'Time', 'Cost', 'PriceDiff', 'BorderCrossed', 'ModeledPriceDiff'])
@@ -185,14 +198,21 @@ def make_crypto_graph(crypto, period_start, period_end):
             last_price = cost
 
         # Построение аномалий под нижней границей
-        plt.scatter(crypto_data.index[below_lower_bound], crypto_data['Close'][below_lower_bound], color='red', label='Anomalies below the lower bound')
+        plt.scatter(crypto_data.index[below_lower_bound], crypto_data['Close'][below_lower_bound], color='#FFFF00', label='Anomalies below the lower bound')
 
         # Построение аномалий над верхней границей
-        plt.scatter(crypto_data.index[above_upper_bound], crypto_data['Close'][above_upper_bound], color='blue', label='Anomalies above the upper bound')
+        plt.scatter(crypto_data.index[above_upper_bound], crypto_data['Close'][above_upper_bound], color='#FF00FF', label='Anomalies above the upper bound')
 
-        plt.xlabel('Date')
-        plt.ylabel('Price')
-        plt.legend()
+        plt.xlabel('Date', color="white")
+        plt.ylabel('Price', color="white")
+        plt.tick_params(axis="x", colors="white")
+        plt.tick_params(axis="y", colors="white")
+        plt.gca().spines['top'].set_color('white')
+        plt.gca().spines['bottom'].set_color('white')
+        plt.gca().spines['left'].set_color('white')
+        plt.gca().spines['right'].set_color('white')
+        plt.legend(facecolor="#0d1245", labelcolor="white")
+        plt.legend(facecolor="#0d1245", labelcolor="white")
 
         plt.savefig('static/images/plot.png')
 
