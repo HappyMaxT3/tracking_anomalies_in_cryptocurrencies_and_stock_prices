@@ -47,13 +47,13 @@ def fetch_and_detect_anomalies():
             else:
                 type_of_anomaly = algorithm.detect_anomalies(stock, portfel)
             if type_of_anomaly in ['fallen', 'increased']:
-                msg = Message('Anomaly detected', sender='trackinganomalies@gmail.com', recipients=user.email)
+                msg = Message('Anomaly detected', sender=os.getenv('MAIL_USERNAME'), recipients=user.email)
                 msg.body = f'Anomaly was detected in {stock}. The share price has {type_of_anomaly}.'
                 mail.send(msg)
     
     
 def send_password(email, password):
-    msg = Message('Your Account Password', sender='trackinganomalies@gmail.com', recipients=[email])
+    msg = Message('Your Account Password', sender=os.getenv('MAIL_USERNAME'), recipients=[email])
     msg.body = f'Your password: {password}'
     mail.send(msg)
 

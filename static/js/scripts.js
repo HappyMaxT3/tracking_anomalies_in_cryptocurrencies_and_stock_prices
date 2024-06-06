@@ -165,6 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
     stockInput.addEventListener('focus', function() {
         showDropdown(stockDropdown, stockOptions);
     });
+
 const suggestions = [
     "AAPL",
     "AMZN",
@@ -198,6 +199,7 @@ const suggestions = [
     "UNI-USD"
   ];
 autocomplete(document.getElementById("stock"), suggestions);
+
     stockInput.addEventListener('input', function() {
         const filteredOptions = filterOptions(stockOptions, stockInput.value);
         showDropdown(stockDropdown, filteredOptions);
