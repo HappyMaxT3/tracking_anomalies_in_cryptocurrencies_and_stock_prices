@@ -102,7 +102,8 @@ def index():
                     db.session.commit()
             else:
                 return redirect(url_for("log_in_account"))
-    return render_template('index.html', url='/static/images/plot.png', news=formatted_news, anomalies=anomalies, error_message=error_message)
+        return render_template('index.html', url='/static/images/plot.png', news=formatted_news, anomalies=anomalies, error_message=error_message)
+    return render_template('index.html', url=None, news=formatted_news, anomalies=anomalies, error_message=error_message)
 
 
 @app.route("/login/", methods=['GET', 'POST'])
