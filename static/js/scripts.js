@@ -102,26 +102,47 @@ document.addEventListener('DOMContentLoaded', function() {
     // Autocomplete functionality
     const stockDropdown = document.getElementById('stock-dropdown');
     const portfelDropdown = document.getElementById('portfel-dropdown');
-    const stockOptions = [    
-    "GSPC",
-    "BTC-USD",
-    "ETH-USD",
-    "USDT-USD",
-    "BNB-USD",
-    "XRP-USD",
-    "ADA-USD",
-    "SOL-USD",
-    "DOGE-USD",
-    "DOT-USD",
-    "AVAX-USD",
-    "SHIB-USD",
-    "MATIC-USD",
-    "LTC-USD",
-    "LINK-USD",
-    "UNI-USD"
-];
+    const stockOptions = [
+        "AAPL",
+        "AMZN",
+        "MSFT",
+        "GOOGL",
+        "TSLA",
+        "META",
+        "NVDA",
+        "PYPL",
+        "NFLX",
+        "INTC",
+        "CSCO",
+        "ADBE",
+        "QCOM",
+        "TXN",
+        "IBM",
+        "BTC-USD",
+        "ETH-USD",
+        "USDT-USD",
+        "BNB-USD",
+        "XRP-USD",
+        "ADA-USD",
+        "SOL-USD",
+        "DOGE-USD",
+        "DOT-USD",
+        "AVAX-USD",
+        "SHIB-USD",
+        "MATIC-USD",
+        "LTC-USD",
+        "LINK-USD",
+        "UNI-USD"
+      ];
     const portfelOptions = [    
     "GSPC",
+    "DJI",
+    "IXIC",
+    "FTSE",
+    "GDAXI",
+    "FCHI",
+    "HSI",
+    "BSESN",
     "BTC-USD",
     "ETH-USD",
     "USDT-USD",
@@ -166,39 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
         showDropdown(stockDropdown, stockOptions);
     });
 
-const suggestions = [
-    "AAPL",
-    "AMZN",
-    "MSFT",
-    "GOOGL",
-    "TSLA",
-    "META",
-    "NVDA",
-    "PYPL",
-    "NFLX",
-    "INTC",
-    "CSCO",
-    "ADBE",
-    "QCOM",
-    "TXN",
-    "IBM",
-    "BTC-USD",
-    "ETH-USD",
-    "USDT-USD",
-    "BNB-USD",
-    "XRP-USD",
-    "ADA-USD",
-    "SOL-USD",
-    "DOGE-USD",
-    "DOT-USD",
-    "AVAX-USD",
-    "SHIB-USD",
-    "MATIC-USD",
-    "LTC-USD",
-    "LINK-USD",
-    "UNI-USD"
-  ];
-autocomplete(document.getElementById("stock"), suggestions);
+// autocomplete(document.getElementById("stock"), suggestions);
 
     stockInput.addEventListener('input', function() {
         const filteredOptions = filterOptions(stockOptions, stockInput.value);
