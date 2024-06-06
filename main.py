@@ -38,8 +38,10 @@ with app.app_context():
 def fetch_and_detect_anomalies():
     users = User.query.all()
     for user in users:
-        for i in user.monitored_stocks:
-            stock, portfel = i.split(',')
+        monitored_stocks = json.loads(user.monitored_stocks) if user.monitored_stocks else []
+        for i in monitored_stocks:
+            stock = i['stock']
+            portfel = i['portfel']
             if '-USD' in portfel:
                 type_of_anomaly = algorithm.detect_crypto_anomalies(stock)
             else:
@@ -122,15 +124,37 @@ def log_in_account():
 @app.route("/profile/", methods=['GET', 'POST'])
 def profile():
     user = User.query.get(session.get('user_id'))
-    if request.method == 'POST':
-        if user:
-            db.session.delete(user)
-            db.session.commit()
-            session.pop('user_id', None)
-        return redirect(url_for("index"))
-
+    monitored_stocks = json.loads(user.monitored_stocks) if user.monitored_stocks else []
+    stocks = []
+    for i in monitored_stocks:
+        stocks.append(i['stock'])
     user_email = user.email
-    return render_template("your_acc.html", your_email=user_email)
+    if request.method == 'POST':
+        selected_stocks = request.form.getlist('items')
+        delete_stock = request.form.get("delete_stock")
+        delete_account = request.form.get("delete_account")
+        log_out = request.form.get("log_out")
+        if user:
+            if delete_stock is not None:
+                for stock_for_delete in selected_stocks:
+                    for i in monitored_stocks:
+                        if i['stock'] == stock_for_delete:
+                            monitored_stocks.remove(i)
+                            stocks.remove(stock_for_delete)
+                            break
+                user.monitored_stocks = json.dumps(monitored_stocks)
+                db.session.commit()
+
+                return render_template("your_acc.html", your_email=user_email, items=stocks)
+            if delete_account is not None:
+                db.session.delete(user)
+                db.session.commit()
+                session.pop('user_id', None)
+                return redirect(url_for("index"))
+            if log_out is not None:
+                session.pop('user_id', None)
+                return redirect(url_for("index"))
+    return render_template("your_acc.html", your_email=user_email, items=stocks)
 
 @app.route("/create_account/", methods=['GET', 'POST'])
 def create_account():
@@ -148,8 +172,7 @@ def scheduled_fetch_data():
     with app.app_context():
         fetch_and_detect_anomalies()
 
-#scheduler.add_job(func=scheduled_fetch_data, trigger='interval', hours=6, id='fetch_data_job')
-#scheduler.start()
-
+# scheduler.add_job(func=scheduled_fetch_data, trigger='interval', hours=6, id='fetch_data_job')
+# scheduler.start()
 if __name__ == '__main__':
     app.run(debug=True)

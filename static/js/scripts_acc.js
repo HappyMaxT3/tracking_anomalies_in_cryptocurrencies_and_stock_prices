@@ -44,11 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Delete subscriptions
 // Sample items data array
-var items = [
-    { name: "Item 1" },
-    { name: "Item 2" },
-    { name: "Item 3" }
-];
+//var items = [
+//    { name: "Item 1" },
+//    { name: "Item 2" },
+//    { name: "Item 3" }
+//];
 
 // Function to populate table with item data
 function populateTable() {

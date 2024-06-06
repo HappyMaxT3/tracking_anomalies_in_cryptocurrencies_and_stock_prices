@@ -18,24 +18,37 @@
 
         <h1 class="title">Your Account</h1>
 
-        <input placeholder="e-mail address" class="input_win" type="text" id="your_email" value="{{ your_email }}" readonly></input>
-
-        <table id="itemsTable" style="margin-top: 3%; margin-right: 5%;">
-            <thead>
-                <tr>
-                    <th>Select</th>
-                    <th>Subscription</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Item data -->
-            </tbody>
-        </table>
-
-        <button id="deleteSelected" class="deleteSelectedButton">Delete Selected</button>
+        <input placeholder="e-mail address" class="email_in_profile" type="text" id="your_email" value="{{ your_email }}" readonly></input>
 
         <form method="POST">
-            <button type="submit" class="down_button_delete" style="margin-top: 5%;">Delete Account</button>
+            <!--<table id="itemsTable" style="margin-top: 3%; margin-right: 5%;">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Subscription</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <input type="checkbox" name="items" value="{{ item }}"> {{ item }}<br>
+                    {% endfor %}
+                </tbody>
+            </table>-->
+
+            <table id="itemsTable" style="margin-top: 3%; margin-right: 5%;">
+                <h2 class="stocks_and_crypto"> Your stocks and cryptocurrencies</h2>
+                <div class="checkbox">
+                    {% for item in items %}
+                        <input type="checkbox" name="items" value="{{ item }}"> {{ item }}<br>
+                    {% endfor %}
+                </div>
+            </table>
+            <button id="deleteSelected" class="deleteSelectedButton" name="delete_stock">Delete Selected</button>
+
+            <div class="profile_buttons">
+                <button type="submit" class="down_button_delete" style="margin-top: 5%;" name="delete_account">Delete Account</button>
+                <button type="submit" class="down_button_delete" style="margin-top: 5%;" name="log_out">Log out</button>
+            </div>
         </form>
     </div>
     
