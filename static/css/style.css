@@ -45,7 +45,7 @@
 
     margin-top: -2%;
     min-width: 1400px;
-    min-height: 950px;
+    min-height: 1300px;
 
     z-index: 0;
 }
@@ -139,20 +139,19 @@
 }
 
 .guide_boxes{
-    width: 16%;
+    width: 30%;
     height: 40%;
     min-height: 550px;
     min-width: 300px;
 
     color: rgba(255, 255, 255, 1);
-    font-size: 35px;
+    font-size: 25px;
     font-family:  'Krub ExtraLight', sans-serif;
 
     border: 2px solid rgba(255, 255, 255, 1);
     border-radius: 40px;
     padding: 15px;
     background-color: rgba(33, 67, 152, 1);
-    text-align: center;
     display: flex;
     flex-direction: column;
     
